@@ -8,9 +8,12 @@ namespace Projeto_MDS
 {
     public class Medicos : Utilizadores
     {
+        public string Nome { get; set; }
+        private int niss;
         private string horaEntrada;
         private string horaSaida;
-        private int niss;
+        public string Especialidade { get; set; }
+        
 
 
 
@@ -49,17 +52,27 @@ namespace Projeto_MDS
 
             set
             {
-                niss = value;
+                if (value.ToString().Length == 9)
+                {
+                    niss = value;
+                }
+                else
+                {
+                    throw new Exception("NISS inválido");
+                }
+                
             }
         }
 
 
 
-        public Medicos(string nome, string pass, string horaentrada, string horasaida, int niss) : base(nome, pass)
+        public Medicos(string username, string pass, string nome, string horaentrada, string horasaida, int niss, string especialidade) : base(username, pass)
         {
+            Nome = nome;
             HoraEntrada = horaentrada;
             HoraSaida = horasaida;
             Niss = niss;
+            Especialidade = especialidade;
         }
     }
 }

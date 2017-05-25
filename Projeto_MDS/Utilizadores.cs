@@ -8,42 +8,13 @@ namespace Projeto_MDS
 {
     public class Utilizadores
     {
-        private string nome;
-        private string password;
+        public string Username { get; set; }
+        public string Password { get; set; }
 
 
-
-        public string Nome
+        public Utilizadores(string username, string pass)
         {
-            get
-            {
-                return nome;
-            }
-
-            set
-            {
-                nome = value;
-            }
-        }
-
-        public string Password
-        {
-            get
-            {
-                return password;
-            }
-
-            set
-            {
-                password = value;
-            }
-        }
-
-
-
-        public Utilizadores(string nome, string pass)
-        {
-            Nome = nome;
+            Username = username;
             Password = pass;
         }
     }

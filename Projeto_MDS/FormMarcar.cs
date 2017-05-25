@@ -44,7 +44,7 @@ namespace Projeto_MDS
                 
                 try
                 {
-                    Consultas consulta = new Consultas(nomeP, data, hora, nomeM);
+                    Marcacao consulta = new Marcacao(nomeP, data, hora, nomeM);
 
                     if (menu.AdicionarConsulta(consulta))
                     {
@@ -77,6 +77,11 @@ namespace Projeto_MDS
             }
 
             return result;
+        }
+
+        private void txtMedico_Leave(object sender, EventArgs e)
+        {
+            
         }
     }
 }

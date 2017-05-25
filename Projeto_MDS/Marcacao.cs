@@ -6,27 +6,14 @@ using System.Threading.Tasks;
 
 namespace Projeto_MDS
 {
-    public class Consultas
-    {
-        private string paciente;
+    public class Marcacao
+    {   
         private string data;
         private string hora;
-        private string medico;
+        public string Paciente { get; set; }
+        public string Medico { get; set; }
 
 
-
-        public string Paciente
-        {
-            get
-            {
-                return paciente;
-            }
-
-            set
-            {
-                paciente = value;
-            }
-        }
 
         public string Data
         {
@@ -62,26 +49,12 @@ namespace Projeto_MDS
             }
         }
 
-        public string Medico
+        public Marcacao(string paciente, string dataConsulta, string horaConsulta, string medico)
         {
-            get
-            {
-                return medico;
-            }
-
-            set
-            {
-                medico = value;
-            }
-        }
-
-
-        public Consultas(string nomePaciente, string dataConsulta, string horaConsulta, string nomeMedico)
-        {
-            Paciente = nomePaciente;
+            Paciente = paciente;
             Data = dataConsulta;
             Hora = horaConsulta;
-            Medico = nomeMedico;
+            Medico = medico;
         }
 
         public bool ValidaData(string data)
