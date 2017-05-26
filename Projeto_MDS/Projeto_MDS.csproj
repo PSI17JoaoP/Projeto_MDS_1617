@@ -61,6 +61,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormMarcar_FiltrarMedicos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMarcar_FiltrarMedicos.Designer.cs">
+      <DependentUpon>FormMarcar_FiltrarMedicos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMarcar_PesquisarNome.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMarcar_PesquisarNome.Designer.cs">
+      <DependentUpon>FormMarcar_PesquisarNome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Marcacao.cs" />
     <Compile Include="Especialidades.cs" />
     <Compile Include="FormAdicionarMedico.cs">
@@ -110,6 +122,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestaoMedicos.resx">
       <DependentUpon>FormGestaoMedicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMarcar_FiltrarMedicos.resx">
+      <DependentUpon>FormMarcar_FiltrarMedicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMarcar_PesquisarNome.resx">
+      <DependentUpon>FormMarcar_PesquisarNome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>

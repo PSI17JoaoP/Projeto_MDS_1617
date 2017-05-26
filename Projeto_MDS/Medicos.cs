@@ -74,5 +74,6 @@ namespace Projeto_MDS
             Niss = niss;
             Especialidade = especialidade;
         }
+
     }
 }

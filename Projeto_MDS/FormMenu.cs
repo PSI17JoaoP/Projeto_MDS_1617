@@ -23,6 +23,7 @@ namespace Projeto_MDS
             registosMarcacoes = new List<Marcacao>();
             registosMedicos = new List<Medicos>();
             registosEspecialidades = new List<Especialidades>();
+            registosPacientes = new List<Pacientes>();
         }
 
         //Conexão à BD
@@ -34,8 +35,23 @@ namespace Projeto_MDS
         List<Marcacao> registosMarcacoes;
         List<Medicos> registosMedicos;
         List<Especialidades> registosEspecialidades;
+        List<Pacientes> registosPacientes;
         //#######################
 
+        public List<Pacientes> Pacientes()
+        {
+            return registosPacientes;
+        }
+
+        public List<Medicos> Medicos()
+        {
+            return registosMedicos;
+        }
+
+        public List<Especialidades> Especialidades()
+        {
+            return registosEspecialidades;
+        }
 
         private void FormMenu_Load(object sender, EventArgs e)
         {
@@ -85,7 +101,7 @@ namespace Projeto_MDS
                         results[2].ToString(),
                         results[3].ToString(),
                         results[4].ToString(),
-                        (int)results[5],
+                        Convert.ToInt32(results[5]),
                         results[6].ToString()
                     );
                     registosMedicos.Add(medico);
@@ -121,6 +137,32 @@ namespace Projeto_MDS
                 }
             }
 
+            results.Close();
+            //----------------------------------------
+
+            //Carregar marcações
+
+            queryString = "SELECT nome, telefone, niss"
+                        + " FROM paciente";
+            query.CommandText = queryString;
+            query.Connection = connect;
+
+            results = query.ExecuteReader();
+
+            if (results.HasRows)
+            {
+                while (results.Read())
+                {
+                    Pacientes paciente = new Pacientes(
+                        results[0].ToString(), 
+                        Convert.ToInt32(results[1]),
+                        Convert.ToInt32(results[2])
+                    );
+
+                    registosPacientes.Add(paciente);
+                }
+            }
+
             //----------------------------------------
 
             connect.Close();
@@ -138,13 +180,13 @@ namespace Projeto_MDS
             Application.Exit();
         }
 
-        public bool AdicionarConsulta(Marcacao consulta)
+        public bool AdicionarConsulta(Marcacao marcacao)
         {
             bool result;
 
             try
             {
-                registosMarcacoes.Add(consulta);
+                registosMarcacoes.Add(marcacao);
                 result = true;
             }
             catch (Exception)
@@ -153,9 +195,21 @@ namespace Projeto_MDS
                 throw;
             }
             
+            
             return result;
         }
 
-        
+        public bool VerDisponibilidadeMedico(string medico, string data, string hora)
+        {
+            bool result = false;
+
+            foreach (Marcacao marcacao in registosMarcacoes)
+            {
+                result = marcacao.VerificarDisponibilidadeMedica(medico, data, hora);
+            }
+
+            return result;
+        }
+
     }
 }

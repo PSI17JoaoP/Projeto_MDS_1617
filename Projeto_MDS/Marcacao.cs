@@ -83,5 +83,17 @@ namespace Projeto_MDS
             return result;
         }
 
+        public bool VerificarDisponibilidadeMedica(string medico, string data, string hora)
+        {
+            bool result = false;
+
+            if (Medico == medico && Data == data && Hora == hora)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
     }
 }
