@@ -44,9 +44,9 @@ namespace Projeto_MDS
                 
                 try
                 {
-                    Marcacao consulta = new Marcacao(nomeP, data, hora, nomeM);
+                    Marcacao marcacao = new Marcacao(nomeP, data, hora, nomeM);
 
-                    if (menu.AdicionarConsulta(consulta))
+                    if (menu.AdicionarConsulta(marcacao))
                     {
                         MessageBox.Show("Marcação registada com sucesso!", "Sucesso", MessageBoxButtons.OK);
                     }

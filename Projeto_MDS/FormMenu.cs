@@ -61,13 +61,15 @@ namespace Projeto_MDS
                     registosEspecialidades.Add(especialidade);
                 }
             }
+
+            results.Close();
             //----------------------------------------
 
             //Carregar Médicos
-            queryString = "SELECT username, password, medico.nome, hora_entrada, hora_saida, niss, especialidade.nome"
-                        + "FROM utilizador"
-                        + "JOIN medico ON utilizador.Id = medico.id_utilizador"
-                        + "JOIN especialidade ON especialidade.Id = medico.id_especialidade";
+            queryString = "SELECT username, password, medico.nome, medico.hora_entrada, medico.hora_saida, medico.niss, especialidade.nome"
+                        + " FROM utilizador"
+                        + " JOIN medico ON utilizador.Id = medico.id_utilizador"
+                        + " JOIN especialidade ON especialidade.Id = medico.id_especialidade";
             query.CommandText = queryString;
             query.Connection = connect;
 
@@ -89,14 +91,16 @@ namespace Projeto_MDS
                     registosMedicos.Add(medico);
                 }
             }
+
+            results.Close();
             //----------------------------------------
 
             //Carregar marcações
 
             queryString = "SELECT paciente.nome, data, hora, medico.nome"
-                        + "FROM marcacao"
-                        + "JOIN medico ON marcacao.id_medico = medico.id_utilizador"
-                        + "JOIN paciente ON marcacao.id_paciente = paciente.id";
+                        + " FROM marcacao"
+                        + " JOIN medico ON marcacao.id_medico = medico.id_utilizador"
+                        + " JOIN paciente ON marcacao.id_paciente = paciente.id";
             query.CommandText = queryString;
             query.Connection = connect;
 
