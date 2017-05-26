@@ -8,35 +8,31 @@ namespace Projeto_MDS
 {
     public class Pacientes
     {
-        private string nome;
-        private int telefone;
-        private int niss;
+        public string Nome { get; set; }
 
+        private int _telefone;
+        private int _niss;
 
-
-        public string Nome
+        public Pacientes(string nome, int telefone, int niss)
         {
-            get
-            {
-                return nome;
-            }
-
-            set
-            {
-                nome = value;
-            }
+            Nome = nome;
+            Telefone = telefone;
+            Niss = niss;
         }
 
         public int Telefone
         {
             get
             {
-                return telefone;
+                return _telefone;
             }
 
             set
             {
-                telefone = value;
+                if (value.ToString().Length == 9)
+                {
+                    _telefone = value;
+                }
             }
         }
 
@@ -44,23 +40,16 @@ namespace Projeto_MDS
         {
             get
             {
-                return niss;
+                return _niss;
             }
 
             set
             {
-                niss = value;
+                if (value.ToString().Length == 9)
+                {
+                    _niss = value;
+                }
             }
-        }
-
-
-
-
-        public Pacientes(string nome, int telefone, int niss)
-        {
-            Nome = nome;
-            Telefone = telefone;
-            Niss = niss;
         }
     }
 }

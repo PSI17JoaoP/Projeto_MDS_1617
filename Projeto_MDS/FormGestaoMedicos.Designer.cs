@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.gbListaMedicos = new System.Windows.Forms.GroupBox();
-            this.gbDetalhesMedico = new System.Windows.Forms.GroupBox();
-            this.btnVoltarPrincipal = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.lvListaMedicos = new System.Windows.Forms.ListView();
+            this.gbDetalhesMedico = new System.Windows.Forms.GroupBox();
             this.lvDetalhesMedico = new System.Windows.Forms.ListView();
+            this.btnVoltarPrincipal = new System.Windows.Forms.Button();
+            this.btnAdicionarMedico = new System.Windows.Forms.Button();
             this.gbListaMedicos.SuspendLayout();
             this.gbDetalhesMedico.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +48,14 @@
             this.gbListaMedicos.TabStop = false;
             this.gbListaMedicos.Text = "Médicos";
             // 
+            // lvListaMedicos
+            // 
+            this.lvListaMedicos.Location = new System.Drawing.Point(6, 19);
+            this.lvListaMedicos.Name = "lvListaMedicos";
+            this.lvListaMedicos.Size = new System.Drawing.Size(280, 333);
+            this.lvListaMedicos.TabIndex = 0;
+            this.lvListaMedicos.UseCompatibleStateImageBehavior = false;
+            // 
             // gbDetalhesMedico
             // 
             this.gbDetalhesMedico.Controls.Add(this.lvDetalhesMedico);
@@ -58,32 +66,6 @@
             this.gbDetalhesMedico.TabStop = false;
             this.gbDetalhesMedico.Text = "Detalhes";
             // 
-            // btnVoltarPrincipal
-            // 
-            this.btnVoltarPrincipal.Location = new System.Drawing.Point(457, 39);
-            this.btnVoltarPrincipal.Name = "btnVoltarPrincipal";
-            this.btnVoltarPrincipal.Size = new System.Drawing.Size(157, 28);
-            this.btnVoltarPrincipal.TabIndex = 2;
-            this.btnVoltarPrincipal.Text = "Voltar ao Menu Principal";
-            this.btnVoltarPrincipal.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(21, 151);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 27);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Adicionar";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // lvListaMedicos
-            // 
-            this.lvListaMedicos.Location = new System.Drawing.Point(6, 19);
-            this.lvListaMedicos.Name = "lvListaMedicos";
-            this.lvListaMedicos.Size = new System.Drawing.Size(280, 333);
-            this.lvListaMedicos.TabIndex = 0;
-            this.lvListaMedicos.UseCompatibleStateImageBehavior = false;
-            // 
             // lvDetalhesMedico
             // 
             this.lvDetalhesMedico.Location = new System.Drawing.Point(6, 19);
@@ -92,12 +74,32 @@
             this.lvDetalhesMedico.TabIndex = 1;
             this.lvDetalhesMedico.UseCompatibleStateImageBehavior = false;
             // 
+            // btnVoltarPrincipal
+            // 
+            this.btnVoltarPrincipal.Location = new System.Drawing.Point(457, 39);
+            this.btnVoltarPrincipal.Name = "btnVoltarPrincipal";
+            this.btnVoltarPrincipal.Size = new System.Drawing.Size(157, 28);
+            this.btnVoltarPrincipal.TabIndex = 2;
+            this.btnVoltarPrincipal.Text = "Voltar ao Menu Principal";
+            this.btnVoltarPrincipal.UseVisualStyleBackColor = true;
+            this.btnVoltarPrincipal.Click += new System.EventHandler(this.BotaoVoltarPrincipal);
+            // 
+            // btnAdicionarMedico
+            // 
+            this.btnAdicionarMedico.Location = new System.Drawing.Point(21, 151);
+            this.btnAdicionarMedico.Name = "btnAdicionarMedico";
+            this.btnAdicionarMedico.Size = new System.Drawing.Size(75, 27);
+            this.btnAdicionarMedico.TabIndex = 3;
+            this.btnAdicionarMedico.Text = "Adicionar";
+            this.btnAdicionarMedico.UseVisualStyleBackColor = true;
+            this.btnAdicionarMedico.Click += new System.EventHandler(this.BotaoAdicionarMedico);
+            // 
             // FormGestaoMedicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 466);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnAdicionarMedico);
             this.Controls.Add(this.btnVoltarPrincipal);
             this.Controls.Add(this.gbDetalhesMedico);
             this.Controls.Add(this.gbListaMedicos);
@@ -114,7 +116,7 @@
         private System.Windows.Forms.GroupBox gbListaMedicos;
         private System.Windows.Forms.GroupBox gbDetalhesMedico;
         private System.Windows.Forms.Button btnVoltarPrincipal;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnAdicionarMedico;
         private System.Windows.Forms.ListView lvDetalhesMedico;
         private System.Windows.Forms.ListView lvListaMedicos;
     }
