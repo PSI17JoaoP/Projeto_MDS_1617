@@ -129,6 +129,13 @@ namespace Projeto_MDS
             Hide();
         }
 
+        private void btnAdicionarMedico_Click(object sender, EventArgs e)
+        {
+            FormGestaoMedicos formGestaoMedicos = new FormGestaoMedicos(this);
+            formGestaoMedicos.Show();
+            Hide();
+        }
+
         private void FormMenu_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
@@ -151,7 +158,5 @@ namespace Projeto_MDS
             
             return result;
         }
-
-        
     }
 }

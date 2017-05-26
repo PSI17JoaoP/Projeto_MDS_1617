@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.gbListaEspecialidades = new System.Windows.Forms.GroupBox();
+            this.lvListaEspecialidades = new System.Windows.Forms.ListView();
             this.gbDetalhesEspecialidade = new System.Windows.Forms.GroupBox();
+            this.lvDetalhesEspecialidade = new System.Windows.Forms.ListView();
             this.btnSelecionarEspecialidade = new System.Windows.Forms.Button();
             this.btnCancelarEspecialidades = new System.Windows.Forms.Button();
-            this.lvListaEspecialidades = new System.Windows.Forms.ListView();
-            this.lvDetalhesEspecialidade = new System.Windows.Forms.ListView();
             this.gbListaEspecialidades.SuspendLayout();
             this.gbDetalhesEspecialidade.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +48,14 @@
             this.gbListaEspecialidades.TabStop = false;
             this.gbListaEspecialidades.Text = "Especialidades";
             // 
+            // lvListaEspecialidades
+            // 
+            this.lvListaEspecialidades.Location = new System.Drawing.Point(6, 19);
+            this.lvListaEspecialidades.Name = "lvListaEspecialidades";
+            this.lvListaEspecialidades.Size = new System.Drawing.Size(321, 330);
+            this.lvListaEspecialidades.TabIndex = 0;
+            this.lvListaEspecialidades.UseCompatibleStateImageBehavior = false;
+            // 
             // gbDetalhesEspecialidade
             // 
             this.gbDetalhesEspecialidade.Controls.Add(this.lvDetalhesEspecialidade);
@@ -58,6 +66,14 @@
             this.gbDetalhesEspecialidade.TabStop = false;
             this.gbDetalhesEspecialidade.Text = "Detalhes";
             // 
+            // lvDetalhesEspecialidade
+            // 
+            this.lvDetalhesEspecialidade.Location = new System.Drawing.Point(6, 19);
+            this.lvDetalhesEspecialidade.Name = "lvDetalhesEspecialidade";
+            this.lvDetalhesEspecialidade.Size = new System.Drawing.Size(213, 227);
+            this.lvDetalhesEspecialidade.TabIndex = 1;
+            this.lvDetalhesEspecialidade.UseCompatibleStateImageBehavior = false;
+            // 
             // btnSelecionarEspecialidade
             // 
             this.btnSelecionarEspecialidade.Location = new System.Drawing.Point(386, 301);
@@ -66,6 +82,7 @@
             this.btnSelecionarEspecialidade.TabIndex = 2;
             this.btnSelecionarEspecialidade.Text = "Selecionar";
             this.btnSelecionarEspecialidade.UseVisualStyleBackColor = true;
+            this.btnSelecionarEspecialidade.Click += new System.EventHandler(this.BotaoSelecionarEspecialidade);
             // 
             // btnCancelarEspecialidades
             // 
@@ -75,22 +92,7 @@
             this.btnCancelarEspecialidades.TabIndex = 3;
             this.btnCancelarEspecialidades.Text = "Cancelar";
             this.btnCancelarEspecialidades.UseVisualStyleBackColor = true;
-            // 
-            // lvListaEspecialidades
-            // 
-            this.lvListaEspecialidades.Location = new System.Drawing.Point(6, 19);
-            this.lvListaEspecialidades.Name = "lvListaEspecialidades";
-            this.lvListaEspecialidades.Size = new System.Drawing.Size(321, 330);
-            this.lvListaEspecialidades.TabIndex = 0;
-            this.lvListaEspecialidades.UseCompatibleStateImageBehavior = false;
-            // 
-            // lvDetalhesEspecialidade
-            // 
-            this.lvDetalhesEspecialidade.Location = new System.Drawing.Point(6, 19);
-            this.lvDetalhesEspecialidade.Name = "lvDetalhesEspecialidade";
-            this.lvDetalhesEspecialidade.Size = new System.Drawing.Size(213, 227);
-            this.lvDetalhesEspecialidade.TabIndex = 1;
-            this.lvDetalhesEspecialidade.UseCompatibleStateImageBehavior = false;
+            this.btnCancelarEspecialidades.Click += new System.EventHandler(this.BotaoCancelarEspecialidade);
             // 
             // FormSelecionarEspecialidade
             // 

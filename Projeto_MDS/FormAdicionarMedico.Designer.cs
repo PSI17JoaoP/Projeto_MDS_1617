@@ -34,14 +34,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.gbHorario = new System.Windows.Forms.GroupBox();
+            this.dtpHoraSaida = new System.Windows.Forms.DateTimePicker();
+            this.dtpHoraEntrada = new System.Windows.Forms.DateTimePicker();
             this.tbNome = new System.Windows.Forms.TextBox();
             this.tbEspecialidade = new System.Windows.Forms.TextBox();
             this.tbNSS = new System.Windows.Forms.TextBox();
             this.btnSelecionarEspecialidade = new System.Windows.Forms.Button();
             this.btnAdicionarMedico = new System.Windows.Forms.Button();
             this.btnCancelarMedico = new System.Windows.Forms.Button();
-            this.dtpHoraEntrada = new System.Windows.Forms.DateTimePicker();
-            this.dtpHoraSaida = new System.Windows.Forms.DateTimePicker();
             this.gbHorario.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -103,6 +103,22 @@
             this.gbHorario.TabStop = false;
             this.gbHorario.Text = "Horario de Trabalho";
             // 
+            // dtpHoraSaida
+            // 
+            this.dtpHoraSaida.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHoraSaida.Location = new System.Drawing.Point(106, 58);
+            this.dtpHoraSaida.Name = "dtpHoraSaida";
+            this.dtpHoraSaida.Size = new System.Drawing.Size(79, 20);
+            this.dtpHoraSaida.TabIndex = 13;
+            // 
+            // dtpHoraEntrada
+            // 
+            this.dtpHoraEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpHoraEntrada.Location = new System.Drawing.Point(106, 23);
+            this.dtpHoraEntrada.Name = "dtpHoraEntrada";
+            this.dtpHoraEntrada.Size = new System.Drawing.Size(79, 20);
+            this.dtpHoraEntrada.TabIndex = 5;
+            // 
             // tbNome
             // 
             this.tbNome.Location = new System.Drawing.Point(54, 24);
@@ -132,6 +148,7 @@
             this.btnSelecionarEspecialidade.TabIndex = 10;
             this.btnSelecionarEspecialidade.Text = "Selecionar Especialidade";
             this.btnSelecionarEspecialidade.UseVisualStyleBackColor = true;
+            this.btnSelecionarEspecialidade.Click += new System.EventHandler(this.BotaoSelecionarEspecialidade);
             // 
             // btnAdicionarMedico
             // 
@@ -141,6 +158,7 @@
             this.btnAdicionarMedico.TabIndex = 11;
             this.btnAdicionarMedico.Text = "Adicionar";
             this.btnAdicionarMedico.UseVisualStyleBackColor = true;
+            this.btnAdicionarMedico.Click += new System.EventHandler(this.BotaoAdicionarMedico);
             // 
             // btnCancelarMedico
             // 
@@ -150,22 +168,7 @@
             this.btnCancelarMedico.TabIndex = 12;
             this.btnCancelarMedico.Text = "Cancelar";
             this.btnCancelarMedico.UseVisualStyleBackColor = true;
-            // 
-            // dtpHoraEntrada
-            // 
-            this.dtpHoraEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoraEntrada.Location = new System.Drawing.Point(106, 23);
-            this.dtpHoraEntrada.Name = "dtpHoraEntrada";
-            this.dtpHoraEntrada.Size = new System.Drawing.Size(79, 20);
-            this.dtpHoraEntrada.TabIndex = 5;
-            // 
-            // dtpHoraSaida
-            // 
-            this.dtpHoraSaida.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpHoraSaida.Location = new System.Drawing.Point(106, 58);
-            this.dtpHoraSaida.Name = "dtpHoraSaida";
-            this.dtpHoraSaida.Size = new System.Drawing.Size(79, 20);
-            this.dtpHoraSaida.TabIndex = 13;
+            this.btnCancelarMedico.Click += new System.EventHandler(this.BotaoCancelarMedico);
             // 
             // FormAdicionarMedico
             // 

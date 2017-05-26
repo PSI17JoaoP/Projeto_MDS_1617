@@ -12,9 +12,31 @@ namespace Projeto_MDS
 {
     public partial class FormAdicionarMedico : Form
     {
-        public FormAdicionarMedico()
+        private FormGestaoMedicos formGestaoMedicos;
+
+        public FormAdicionarMedico(FormGestaoMedicos form)
         {
             InitializeComponent();
+
+            formGestaoMedicos = form;
+        }
+
+        private void BotaoSelecionarEspecialidade(object sender, EventArgs e)
+        {
+            FormSelecionarEspecialidade formSelecionarEspecialidade = new FormSelecionarEspecialidade(this);
+            formSelecionarEspecialidade.Show();
+            Hide();
+        }
+
+        private void BotaoAdicionarMedico(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BotaoCancelarMedico(object sender, EventArgs e)
+        {
+            formGestaoMedicos.Show();
+            Hide();
         }
     }
 }

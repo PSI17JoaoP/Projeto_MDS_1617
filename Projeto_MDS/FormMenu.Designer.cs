@@ -38,10 +38,10 @@
             // 
             // btnMarcarConsulta
             // 
-            this.btnMarcarConsulta.Location = new System.Drawing.Point(231, 26);
-            this.btnMarcarConsulta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnMarcarConsulta.Location = new System.Drawing.Point(11, 60);
+            this.btnMarcarConsulta.Margin = new System.Windows.Forms.Padding(2);
             this.btnMarcarConsulta.Name = "btnMarcarConsulta";
-            this.btnMarcarConsulta.Size = new System.Drawing.Size(172, 44);
+            this.btnMarcarConsulta.Size = new System.Drawing.Size(90, 36);
             this.btnMarcarConsulta.TabIndex = 0;
             this.btnMarcarConsulta.Text = "Marcar Consulta";
             this.btnMarcarConsulta.UseVisualStyleBackColor = true;
@@ -49,59 +49,63 @@
             // 
             // btnPesquisarConsulta
             // 
-            this.btnPesquisarConsulta.Location = new System.Drawing.Point(235, 139);
-            this.btnPesquisarConsulta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnPesquisarConsulta.Enabled = false;
+            this.btnPesquisarConsulta.Location = new System.Drawing.Point(115, 60);
+            this.btnPesquisarConsulta.Margin = new System.Windows.Forms.Padding(2);
             this.btnPesquisarConsulta.Name = "btnPesquisarConsulta";
-            this.btnPesquisarConsulta.Size = new System.Drawing.Size(168, 44);
+            this.btnPesquisarConsulta.Size = new System.Drawing.Size(90, 36);
             this.btnPesquisarConsulta.TabIndex = 1;
             this.btnPesquisarConsulta.Text = "Pesquisar Consulta";
             this.btnPesquisarConsulta.UseVisualStyleBackColor = true;
             // 
             // btnAdicionarMedico
             // 
-            this.btnAdicionarMedico.Location = new System.Drawing.Point(28, 26);
-            this.btnAdicionarMedico.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAdicionarMedico.Location = new System.Drawing.Point(218, 60);
+            this.btnAdicionarMedico.Margin = new System.Windows.Forms.Padding(2);
             this.btnAdicionarMedico.Name = "btnAdicionarMedico";
-            this.btnAdicionarMedico.Size = new System.Drawing.Size(168, 44);
+            this.btnAdicionarMedico.Size = new System.Drawing.Size(90, 36);
             this.btnAdicionarMedico.TabIndex = 2;
             this.btnAdicionarMedico.Text = "Adicionar Médico";
             this.btnAdicionarMedico.UseVisualStyleBackColor = true;
+            this.btnAdicionarMedico.Click += new System.EventHandler(this.btnAdicionarMedico_Click);
             // 
             // btnGerirEspecialidades
             // 
-            this.btnGerirEspecialidades.Location = new System.Drawing.Point(28, 75);
-            this.btnGerirEspecialidades.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnGerirEspecialidades.Enabled = false;
+            this.btnGerirEspecialidades.Location = new System.Drawing.Point(323, 60);
+            this.btnGerirEspecialidades.Margin = new System.Windows.Forms.Padding(2);
             this.btnGerirEspecialidades.Name = "btnGerirEspecialidades";
-            this.btnGerirEspecialidades.Size = new System.Drawing.Size(375, 44);
+            this.btnGerirEspecialidades.Size = new System.Drawing.Size(126, 36);
             this.btnGerirEspecialidades.TabIndex = 3;
             this.btnGerirEspecialidades.Text = "Gerir Especialidades Médicas";
             this.btnGerirEspecialidades.UseVisualStyleBackColor = true;
             // 
             // btnConsultarPacientes
             // 
-            this.btnConsultarPacientes.Location = new System.Drawing.Point(28, 139);
-            this.btnConsultarPacientes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConsultarPacientes.Enabled = false;
+            this.btnConsultarPacientes.Location = new System.Drawing.Point(328, 17);
+            this.btnConsultarPacientes.Margin = new System.Windows.Forms.Padding(2);
             this.btnConsultarPacientes.Name = "btnConsultarPacientes";
-            this.btnConsultarPacientes.Size = new System.Drawing.Size(168, 44);
+            this.btnConsultarPacientes.Size = new System.Drawing.Size(122, 27);
             this.btnConsultarPacientes.TabIndex = 4;
-            this.btnConsultarPacientes.Text = "Consultar Paciente";
+            this.btnConsultarPacientes.Text = "Consultar Paciente ...";
             this.btnConsultarPacientes.UseVisualStyleBackColor = true;
             // 
             // btnRegistarConsultaMedica
             // 
-            this.btnRegistarConsultaMedica.Location = new System.Drawing.Point(28, 199);
-            this.btnRegistarConsultaMedica.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRegistarConsultaMedica.Location = new System.Drawing.Point(215, 12);
+            this.btnRegistarConsultaMedica.Margin = new System.Windows.Forms.Padding(2);
             this.btnRegistarConsultaMedica.Name = "btnRegistarConsultaMedica";
-            this.btnRegistarConsultaMedica.Size = new System.Drawing.Size(375, 44);
+            this.btnRegistarConsultaMedica.Size = new System.Drawing.Size(98, 36);
             this.btnRegistarConsultaMedica.TabIndex = 5;
             this.btnRegistarConsultaMedica.Text = "Registar Consulta Médica";
             this.btnRegistarConsultaMedica.UseVisualStyleBackColor = true;
             // 
             // FormMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 257);
+            this.ClientSize = new System.Drawing.Size(463, 107);
             this.Controls.Add(this.btnRegistarConsultaMedica);
             this.Controls.Add(this.btnConsultarPacientes);
             this.Controls.Add(this.btnGerirEspecialidades);
@@ -109,7 +113,7 @@
             this.Controls.Add(this.btnPesquisarConsulta);
             this.Controls.Add(this.btnMarcarConsulta);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "FormMenu";
             this.Text = "Menu";
