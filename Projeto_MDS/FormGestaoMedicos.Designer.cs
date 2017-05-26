@@ -34,6 +34,11 @@
             this.lvDetalhesMedico = new System.Windows.Forms.ListView();
             this.btnVoltarPrincipal = new System.Windows.Forms.Button();
             this.btnAdicionarMedico = new System.Windows.Forms.Button();
+            this.lvcGestaoMedicosNome = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcGestaoMedicosEspecialidade = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcGestaoMedicosNiss = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcGestaoMedicosHoraEntrada = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvcGestaoMedicosHoraSaida = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gbListaMedicos.SuspendLayout();
             this.gbDetalhesMedico.SuspendLayout();
             this.SuspendLayout();
@@ -50,11 +55,19 @@
             // 
             // lvListaMedicos
             // 
+            this.lvListaMedicos.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvcGestaoMedicosNome,
+            this.lvcGestaoMedicosEspecialidade,
+            this.lvcGestaoMedicosNiss,
+            this.lvcGestaoMedicosHoraEntrada,
+            this.lvcGestaoMedicosHoraSaida});
+            this.lvListaMedicos.FullRowSelect = true;
             this.lvListaMedicos.Location = new System.Drawing.Point(6, 19);
             this.lvListaMedicos.Name = "lvListaMedicos";
             this.lvListaMedicos.Size = new System.Drawing.Size(280, 333);
             this.lvListaMedicos.TabIndex = 0;
             this.lvListaMedicos.UseCompatibleStateImageBehavior = false;
+            this.lvListaMedicos.View = System.Windows.Forms.View.Details;
             // 
             // gbDetalhesMedico
             // 
@@ -94,6 +107,26 @@
             this.btnAdicionarMedico.UseVisualStyleBackColor = true;
             this.btnAdicionarMedico.Click += new System.EventHandler(this.BotaoAdicionarMedico);
             // 
+            // lvcGestaoMedicosNome
+            // 
+            this.lvcGestaoMedicosNome.Text = "Nome";
+            // 
+            // lvcGestaoMedicosEspecialidade
+            // 
+            this.lvcGestaoMedicosEspecialidade.Text = "Especialidade";
+            // 
+            // lvcGestaoMedicosNiss
+            // 
+            this.lvcGestaoMedicosNiss.Text = "NISS";
+            // 
+            // lvcGestaoMedicosHoraEntrada
+            // 
+            this.lvcGestaoMedicosHoraEntrada.Text = "Hora de Entrada";
+            // 
+            // lvcGestaoMedicosHoraSaida
+            // 
+            this.lvcGestaoMedicosHoraSaida.Text = "Hora de Saida";
+            // 
             // FormGestaoMedicos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -119,5 +152,10 @@
         private System.Windows.Forms.Button btnAdicionarMedico;
         private System.Windows.Forms.ListView lvDetalhesMedico;
         private System.Windows.Forms.ListView lvListaMedicos;
+        private System.Windows.Forms.ColumnHeader lvcGestaoMedicosNome;
+        private System.Windows.Forms.ColumnHeader lvcGestaoMedicosEspecialidade;
+        private System.Windows.Forms.ColumnHeader lvcGestaoMedicosNiss;
+        private System.Windows.Forms.ColumnHeader lvcGestaoMedicosHoraEntrada;
+        private System.Windows.Forms.ColumnHeader lvcGestaoMedicosHoraSaida;
     }
 }

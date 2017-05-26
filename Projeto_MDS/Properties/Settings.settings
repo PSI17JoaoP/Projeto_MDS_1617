@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="connectionString" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\leona\Source\Repos\Projeto_MDS_1617\Projeto_MDS\basedadoshospital.mdf';Integrated Security=True</Value>
+      <Value Profile="(Default)">Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="D:\Desktop\TESP - PSI\S2\PL\MDS\Projeto\Source Code\Projeto_MDS_1617\Projeto_MDS\basedadoshospital.mdf";Integrated Security=True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

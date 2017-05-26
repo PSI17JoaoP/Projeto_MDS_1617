@@ -25,8 +25,9 @@ namespace Projeto_MDS.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\'C:\\Users\\leona\\Source\\Repos\\" +
-            "Projeto_MDS_1617\\Projeto_MDS\\basedadoshospital.mdf\';Integrated Security=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\Desktop\\TESP - PSI\\S2\\PL\\" +
+            "MDS\\Projeto\\Source Code\\Projeto_MDS_1617\\Projeto_MDS\\basedadoshospital.mdf\";Inte" +
+            "grated Security=True")]
         public string connectionString {
             get {
                 return ((string)(this["connectionString"]));

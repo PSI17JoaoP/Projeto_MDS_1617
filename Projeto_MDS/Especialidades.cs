@@ -8,24 +8,7 @@ namespace Projeto_MDS
 {
     public class Especialidades
     {
-        private string nome;
-
-
-
-        public string Nome
-        {
-            get
-            {
-                return nome;
-            }
-
-            set
-            {
-                nome = value;
-            }
-        }
-
-
+        public string Nome { get; set; }
 
         public Especialidades(string nome)
         {

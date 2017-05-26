@@ -86,7 +86,7 @@ namespace Projeto_MDS
                         results[3].ToString(),
                         results[4].ToString(),
                         (int)results[5],
-                        results[6].ToString()
+                        new Especialidades(results[6].ToString())
                     );
                     registosMedicos.Add(medico);
                 }

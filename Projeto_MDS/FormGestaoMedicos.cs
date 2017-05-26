@@ -33,5 +33,17 @@ namespace Projeto_MDS
             formMenu.Show();
             Hide();
         }
+
+        public void CarregarMedico(Medicos medicoInserido)
+        {
+            ListViewItem listViewRowMedico = new ListViewItem(medicoInserido.Nome);
+            listViewRowMedico.SubItems.Add(medicoInserido.Especialidade.Nome);
+            listViewRowMedico.SubItems.Add(medicoInserido.Niss.ToString());
+            listViewRowMedico.SubItems.Add(medicoInserido.HoraEntrada);
+            listViewRowMedico.SubItems.Add(medicoInserido.HoraSaida);
+            lvListaMedicos.Items.Add(listViewRowMedico);
+
+            //formMenu
+        }
     }
 }

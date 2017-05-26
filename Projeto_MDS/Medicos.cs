@@ -11,11 +11,11 @@ namespace Projeto_MDS
         public string Nome { get; set; }
         public string HoraEntrada { get; set; }
         public string HoraSaida { get; set; }
-        public string Especialidade { get; set; }
+        public Especialidades Especialidade { get; set; }
 
         private int _niss;
 
-        public Medicos(string username, string pass, string nome, string horaentrada, string horasaida, int niss, string especialidade) : base(username, pass)
+        public Medicos(string username, string pass, string nome, string horaentrada, string horasaida, int niss, Especialidades especialidade) : base(username, pass)
         {
             Nome = nome;
             HoraEntrada = horaentrada;
