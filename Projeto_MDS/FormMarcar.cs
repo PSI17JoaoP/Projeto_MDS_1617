@@ -20,6 +20,7 @@ namespace Projeto_MDS
             InitializeComponent();
 
             menu = form;
+            dtpData.MinDate = DateTime.Today;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -81,7 +82,33 @@ namespace Projeto_MDS
 
         private void txtMedico_Leave(object sender, EventArgs e)
         {
-            
+            if (menu.VerDisponibilidadeMedico(txtMedico.Text, dtpData.Text, txtHora.Text))
+            {
+                MessageBox.Show("Escolha outro médico", "Aviso");
+                txtMedico.ResetText();
+            }
+        }
+
+        private void btnPesquisarNome_Click(object sender, EventArgs e)
+        {
+            FormMarcar_PesquisarNome form = new FormMarcar_PesquisarNome(menu.Pacientes(), this);
+            form.ShowDialog();
+        }
+
+        public void NomePesquisado(string nome)
+        {
+            txtNome.Text = nome;
+        }
+
+        private void btnFiltrarMedico_Click(object sender, EventArgs e)
+        {
+            FormMarcar_FiltrarMedicos form = new FormMarcar_FiltrarMedicos(menu.Medicos(), menu.Especialidades(), this);
+            form.ShowDialog();
+        }
+
+        public void MedicoPesquisado(string medico)
+        {
+            txtMedico.Text = medico;
         }
     }
 }

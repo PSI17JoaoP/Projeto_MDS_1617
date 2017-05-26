@@ -106,6 +106,7 @@
             this.btnFiltrarMedico.TabIndex = 4;
             this.btnFiltrarMedico.Text = "Filtrar";
             this.btnFiltrarMedico.UseVisualStyleBackColor = true;
+            this.btnFiltrarMedico.Click += new System.EventHandler(this.btnFiltrarMedico_Click);
             // 
             // btnPesquisarNome
             // 
@@ -116,6 +117,7 @@
             this.btnPesquisarNome.TabIndex = 5;
             this.btnPesquisarNome.Text = "Pesquisar Nome";
             this.btnPesquisarNome.UseVisualStyleBackColor = true;
+            this.btnPesquisarNome.Click += new System.EventHandler(this.btnPesquisarNome_Click);
             // 
             // txtNome
             // 
@@ -128,6 +130,7 @@
             // 
             this.dtpData.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpData.Location = new System.Drawing.Point(77, 86);
+            this.dtpData.MinDate = new System.DateTime(2017, 5, 26, 0, 0, 0, 0);
             this.dtpData.Name = "dtpData";
             this.dtpData.Size = new System.Drawing.Size(127, 22);
             this.dtpData.TabIndex = 7;

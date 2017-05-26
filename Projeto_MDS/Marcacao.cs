@@ -24,7 +24,15 @@ namespace Projeto_MDS
 
             set
             {
-                data = value;
+                if (ValidaData(value))
+                {
+                    data = value;
+                }
+                else
+                {
+                    throw new Exception("Data inválida");
+                }
+                
             }
         }
 
@@ -62,8 +70,11 @@ namespace Projeto_MDS
             bool result = false;
 
 
-
-
+            DateTime date = DateTime.Parse(data);
+            if (DateTime.Compare(date, DateTime.Today) >= 0)
+            {
+                result = true;
+            }
 
             return result;
         }
@@ -76,6 +87,18 @@ namespace Projeto_MDS
             int minutos = Convert.ToInt32(hora.Substring(3));
 
             if ((horas > 0 && horas < 24) && (minutos >= 0 && minutos < 60))
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        public bool VerificarDisponibilidadeMedica(string medico, string data, string hora)
+        {
+            bool result = false;
+
+            if (Medico == medico && Data == data && Hora == hora)
             {
                 result = true;
             }
