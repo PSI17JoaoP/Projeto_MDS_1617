@@ -10,8 +10,8 @@ namespace Projeto_MDS
     {   
         private string data;
         private string hora;
-        public string Paciente { get; set; }
-        public string Medico { get; set; }
+        public Pacientes Paciente { get; set; }
+        public Medicos Medico { get; set; }
 
 
 
@@ -57,7 +57,7 @@ namespace Projeto_MDS
             }
         }
 
-        public Marcacao(string paciente, string dataConsulta, string horaConsulta, string medico)
+        public Marcacao(Pacientes paciente, string dataConsulta, string horaConsulta, Medicos medico)
         {
             Paciente = paciente;
             Data = dataConsulta;
@@ -98,7 +98,7 @@ namespace Projeto_MDS
         {
             bool result = false;
 
-            if (Medico == medico && Data == data && Hora == hora)
+            if (Medico.Nome == medico && Data == data && Hora == hora)
             {
                 result = true;
             }

@@ -81,6 +81,32 @@ namespace Projeto_MDS
             results.Close();
             //----------------------------------------
 
+            //Carregar Pacientes
+
+            queryString = "SELECT nome, telefone, niss"
+                        + " FROM paciente";
+            query.CommandText = queryString;
+            query.Connection = connect;
+
+            results = query.ExecuteReader();
+
+            if (results.HasRows)
+            {
+                while (results.Read())
+                {
+                    Pacientes paciente = new Pacientes(
+                        results[0].ToString(),
+                        Convert.ToInt32(results[1]),
+                        Convert.ToInt32(results[2])
+                    );
+
+                    registosPacientes.Add(paciente);
+                }
+            }
+
+            results.Close();
+            //----------------------------------------
+
             //Carregar Médicos
             queryString = "SELECT username, password, medico.nome, medico.hora_entrada, medico.hora_saida, medico.niss, especialidade.nome"
                         + " FROM utilizador"
@@ -95,6 +121,9 @@ namespace Projeto_MDS
             {
                 while (results.Read())
                 {
+                    Especialidades especialidade = registosEspecialidades
+                        .Where(esp => esp.Nome.Equals(results[6].ToString())).First();
+
                     Medicos medico = new Medicos(
                         results[0].ToString(),
                         results[1].ToString(),
@@ -102,7 +131,7 @@ namespace Projeto_MDS
                         results[3].ToString(),
                         results[4].ToString(),
                         Convert.ToInt32(results[5]),
-                        new Especialidades(results[6].ToString())
+                        especialidade 
                     );
                     registosMedicos.Add(medico);
                 }
@@ -126,11 +155,14 @@ namespace Projeto_MDS
             {
                 while (results.Read())
                 {
+                    Pacientes paciente = registosPacientes.Where(p => p.Nome.Equals(results[0].ToString())).First();
+                    Medicos medico = registosMedicos.Where(m => m.Nome.Equals(results[3].ToString())).First();
+
                     Marcacao marcacao = new Marcacao(
-                        results[0].ToString(),
+                        paciente,
                         results[1].ToString(), 
                         results[2].ToString(), 
-                        results[3].ToString()
+                        medico
                     );
 
                     registosMarcacoes.Add(marcacao);
@@ -138,31 +170,6 @@ namespace Projeto_MDS
             }
 
             results.Close();
-            //----------------------------------------
-
-            //Carregar marcações
-
-            queryString = "SELECT nome, telefone, niss"
-                        + " FROM paciente";
-            query.CommandText = queryString;
-            query.Connection = connect;
-
-            results = query.ExecuteReader();
-
-            if (results.HasRows)
-            {
-                while (results.Read())
-                {
-                    Pacientes paciente = new Pacientes(
-                        results[0].ToString(), 
-                        Convert.ToInt32(results[1]),
-                        Convert.ToInt32(results[2])
-                    );
-
-                    registosPacientes.Add(paciente);
-                }
-            }
-
             //----------------------------------------
 
             connect.Close();
@@ -187,19 +194,28 @@ namespace Projeto_MDS
             Application.Exit();
         }
 
-        public bool AdicionarConsulta(Marcacao marcacao)
+        public bool AdicionarMarcacao(string nomeP, string data, string hora, string nomeM)
         {
             bool result;
 
             try
             {
+                Pacientes paciente = registosPacientes.Where(p => p.Nome.Equals(nomeP)).First();
+
+                //--------------------
+                Medicos medico = registosMedicos.Where(m => m.Nome.Equals(nomeM)).First();
+
+                Marcacao marcacao = new Marcacao(paciente, data, hora, medico);
+
                 registosMarcacoes.Add(marcacao);
                 result = true;
+                
+                
             }
             catch (Exception)
             {
                 result = false;
-                throw;
+                throw new Exception("Médico ou Paciente não registados");
             }
             
             

@@ -45,9 +45,7 @@ namespace Projeto_MDS
                 
                 try
                 {
-                    Marcacao marcacao = new Marcacao(nomeP, data, hora, nomeM);
-
-                    if (menu.AdicionarConsulta(marcacao))
+                    if (menu.AdicionarMarcacao(nomeP, data, hora, nomeM))
                     {
                         MessageBox.Show("Marcação registada com sucesso!", "Sucesso", MessageBoxButtons.OK);
                     }

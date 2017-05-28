@@ -36,7 +36,7 @@ namespace Projeto_MDS
 
             foreach (Medicos registo in dados)
             {
-                if (registo.Especialidade.Contains(especialidade))
+                if (registo.Especialidade.Nome.Contains(especialidade))
                 {
                     lvMedicos.Items.Add(registo.Nome);
                 }
