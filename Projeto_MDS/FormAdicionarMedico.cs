@@ -50,13 +50,37 @@ namespace Projeto_MDS
                             string horaSaidaMedico = dtpHoraSaida.Text;
                             Especialidades especialidadeMedico = GetEspecialidadeForm(tbEspecialidade.Text);
 
-                            if (especialidadeMedico is Especialidades)
-                            {
-                                Medicos medico = new Medicos(usernameMedico, passwordMedico, nomeMedico, horaEntradaMedico, horaSaidaMedico, nissMedico, especialidadeMedico);
+                            DialogResult confirmacaoAdicionar = MessageBox.Show("Tem a certeza qe deseja inserir o médico '" + nomeMedico + "' ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                                formGestaoMedicos.CarregarMedico(medico);
-                                formGestaoMedicos.Show();
-                                Close();
+                            if (confirmacaoAdicionar == DialogResult.Yes)
+                            {
+                                if (especialidadeMedico is Especialidades)
+                                {
+                                    Medicos medico = new Medicos(usernameMedico, passwordMedico, nomeMedico, horaEntradaMedico, horaSaidaMedico, nissMedico, especialidadeMedico);
+
+                                    try
+                                    {
+                                        if (medico.VerificarDadosMedico())
+                                        {
+                                            if(medico.Adicionar())
+                                            {
+                                                MessageBox.Show("Médico inserido com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                formGestaoMedicos.Show();
+                                                Close();
+                                            }
+                                        }
+
+                                        else
+                                        {
+                                            MessageBox.Show("O médico inserido já existe.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                    }
+
+                                    catch (Exception)
+                                    {
+                                        MessageBox.Show("Ocorreu um erro na inserção do médico.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
                             }
                         }
 
@@ -96,39 +120,39 @@ namespace Projeto_MDS
 
             try
             {
-                SqlConnection connection = new SqlConnection();
-                connection.ConnectionString = Properties.Settings.Default.connectionString;
-
-                connection.Open();
-
-                SqlCommand querySql = new SqlCommand();
-                SqlDataReader queryReader;
-
-                string queryString = "SELECT nome FROM especialidade WHERE nome = @nomeEspecialidade";
-                querySql.CommandText = queryString;
-
-                SqlParameter nomeSQL = new SqlParameter("@nomeEspecialidade", nomeEspecialidade);
-                querySql.Parameters.Add(nomeSQL);
-                querySql.Connection = connection;
-
-                using (queryReader = querySql.ExecuteReader())
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionString))
                 {
-                    if (queryReader.HasRows)
-                    {
-                        queryReader.Read();
-                        especialidadeMedico = new Especialidades(queryReader["nome"].ToString());
-                    }
+                    string queryString = "SELECT nome FROM especialidade WHERE nome = @nomeEspecialidade";
 
-                    else
+                    using (SqlCommand querySql = new SqlCommand(queryString, connection))
                     {
-                        MessageBox.Show("Não existe nenhuma especialidade com o nome inserido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        SqlParameter nomeSQL = new SqlParameter("@nomeEspecialidade", nomeEspecialidade);
+                        querySql.Parameters.Add(nomeSQL);
+
+                        connection.Open();
+
+                        using (SqlDataReader queryReader = querySql.ExecuteReader())
+                        {
+                            if (queryReader.HasRows)
+                            {
+                                queryReader.Read();
+                                especialidadeMedico = new Especialidades(queryReader["nome"].ToString());
+                            }
+
+                            else
+                            {
+                                MessageBox.Show("Não existe nenhuma especialidade com o nome inserido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+
+                        connection.Close();
                     }
                 }
             }
 
             catch(Exception)
             {
-                //return null;
+                MessageBox.Show("Ocorreu um erro no pedido à base de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return especialidadeMedico;
