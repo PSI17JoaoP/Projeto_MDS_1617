@@ -38,27 +38,33 @@ namespace Projeto_MDS
             if (VerificaCampos())
             {
                 string nomeP = txtNome.Text;
-                string data = dtpData.Text;
                 string hora = txtHora.Text;
                 string nomeM = txtMedico.Text;
+                DateTime data = dtpData.Value;
 
-                
-                try
+                if (menu.VerDisponibilidadeMedico(nomeM, data.ToShortDateString(), hora))
                 {
-                    if (menu.AdicionarMarcacao(nomeP, data, hora, nomeM))
+                    MessageBox.Show("Escolha outro médico", "Aviso");
+                    txtMedico.ResetText();
+                }
+                else
+                {
+                    try
                     {
-                        MessageBox.Show("Marcação registada com sucesso!", "Sucesso", MessageBoxButtons.OK);
+                        if (menu.AdicionarMarcacao(nomeP, data, hora, nomeM))
+                        {
+                            MessageBox.Show("Marcação registada com sucesso!", "Sucesso", MessageBoxButtons.OK);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro ao registar a marcação", "Erro", MessageBoxButtons.OK);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Erro ao registar a marcação", "Erro", MessageBoxButtons.OK);
+                        MessageBox.Show(ex.Message);
                     }
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-
             }else
             {
                 MessageBox.Show("Tem de preencher todos os campos");
@@ -76,15 +82,6 @@ namespace Projeto_MDS
             }
 
             return result;
-        }
-
-        private void txtMedico_Leave(object sender, EventArgs e)
-        {
-            if (menu.VerDisponibilidadeMedico(txtMedico.Text, dtpData.Text, txtHora.Text))
-            {
-                MessageBox.Show("Escolha outro médico", "Aviso");
-                txtMedico.ResetText();
-            }
         }
 
         private void btnPesquisarNome_Click(object sender, EventArgs e)

@@ -162,7 +162,8 @@ namespace Projeto_MDS
                         paciente,
                         results[1].ToString(), 
                         results[2].ToString(), 
-                        medico
+                        medico,
+                        false
                     );
 
                     registosMarcacoes.Add(marcacao);
@@ -194,7 +195,7 @@ namespace Projeto_MDS
             Application.Exit();
         }
 
-        public bool AdicionarMarcacao(string nomeP, string data, string hora, string nomeM)
+        public bool AdicionarMarcacao(string nomeP, DateTime data, string hora, string nomeM)
         {
             bool result;
 
@@ -205,9 +206,33 @@ namespace Projeto_MDS
                 //--------------------
                 Medicos medico = registosMedicos.Where(m => m.Nome.Equals(nomeM)).First();
 
-                Marcacao marcacao = new Marcacao(paciente, data, hora, medico);
+                Marcacao marcacao = new Marcacao(paciente, data.ToShortDateString(), hora, medico, true);
 
                 registosMarcacoes.Add(marcacao);
+
+                //BD
+
+                connect.Open();
+
+                SqlCommand query = new SqlCommand();
+                int results;
+                string queryString;
+
+                queryString = "INSERT INTO marcacao (data, hora, id_paciente, id_medico)"
+                                + " VALUES (@value1, @value2, @value3, @value4);";
+
+                query.CommandText = queryString;
+                query.Parameters.AddWithValue("@value1", data);
+                query.Parameters.AddWithValue("@value2", hora);
+                query.Parameters.AddWithValue("@value3", registosPacientes.IndexOf(paciente)+1);
+                query.Parameters.AddWithValue("@value4", registosMedicos.IndexOf(medico)+1);
+                query.Connection = connect;
+               
+                results = query.ExecuteNonQuery();
+                
+
+                connect.Close();
+                //---------------------
                 result = true;
                 
                 
@@ -233,6 +258,5 @@ namespace Projeto_MDS
 
             return result;
         }
-
     }
 }

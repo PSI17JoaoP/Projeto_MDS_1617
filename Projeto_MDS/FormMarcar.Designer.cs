@@ -141,7 +141,6 @@
             this.txtMedico.Name = "txtMedico";
             this.txtMedico.Size = new System.Drawing.Size(127, 22);
             this.txtMedico.TabIndex = 9;
-            this.txtMedico.Leave += new System.EventHandler(this.txtMedico_Leave);
             // 
             // txtHora
             // 

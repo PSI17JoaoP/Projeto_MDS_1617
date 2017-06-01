@@ -8,61 +8,45 @@ namespace Projeto_MDS
 {
     public class Marcacao
     {   
-        private string data;
-        private string hora;
+        public string Data;
+        public string Hora;
         public Pacientes Paciente { get; set; }
         public Medicos Medico { get; set; }
 
 
-
-        public string Data
+        public Marcacao(Pacientes paciente, string dataConsulta, string horaConsulta, Medicos medico, bool novo)
         {
-            get
+            if (novo)
             {
-                return data;
-            }
+                Paciente = paciente;
 
-            set
-            {
-                if (ValidaData(value))
+                if (ValidaData(dataConsulta))
                 {
-                    data = value;
+                    Data = dataConsulta;
                 }
                 else
                 {
                     throw new Exception("Data inválida");
                 }
-                
-            }
-        }
 
-        public string Hora
-        {
-            get
-            {
-                return hora;
-            }
-
-            set
-            {
-                if (ValidaHora(value))
+                if (ValidaHora(horaConsulta))
                 {
-                    hora = value;
+                    Hora = horaConsulta;
                 }
                 else
                 {
                     throw new Exception("Hora inválida");
                 }
-
+                
+                Medico = medico;
             }
-        }
-
-        public Marcacao(Pacientes paciente, string dataConsulta, string horaConsulta, Medicos medico)
-        {
-            Paciente = paciente;
-            Data = dataConsulta;
-            Hora = horaConsulta;
-            Medico = medico;
+            else
+            {
+                Paciente = paciente;
+                Data = dataConsulta;
+                Hora = horaConsulta;
+                Medico = medico;
+            }
         }
 
         public bool ValidaData(string data)
