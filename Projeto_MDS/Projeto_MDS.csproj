@@ -61,6 +61,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consulta.cs" />
+    <Compile Include="FormConsultaMedica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConsultaMedica.designer.cs">
+      <DependentUpon>FormConsultaMedica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormMarcar_FiltrarMedicos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -72,6 +85,18 @@
     </Compile>
     <Compile Include="FormMarcar_PesquisarNome.Designer.cs">
       <DependentUpon>FormMarcar_PesquisarNome.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormPrincipalMedico.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormPrincipalMedico.designer.cs">
+      <DependentUpon>FormPrincipalMedico.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTipoSintoma.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTipoSintoma.designer.cs">
+      <DependentUpon>FormTipoSintoma.cs</DependentUpon>
     </Compile>
     <Compile Include="Marcacao.cs" />
     <Compile Include="Especialidades.cs" />
@@ -116,12 +141,19 @@
     <Compile Include="Profissionais.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoSintoma.cs" />
     <Compile Include="Utilizadores.cs" />
     <EmbeddedResource Include="FormAdicionarMedico.resx">
       <DependentUpon>FormAdicionarMedico.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormConsultaMedica.resx">
+      <DependentUpon>FormConsultaMedica.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGestaoMedicos.resx">
       <DependentUpon>FormGestaoMedicos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMarcar_FiltrarMedicos.resx">
       <DependentUpon>FormMarcar_FiltrarMedicos.cs</DependentUpon>
@@ -138,8 +170,14 @@
     <EmbeddedResource Include="FormMinhasConsultas.resx">
       <DependentUpon>FormMinhasConsultas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormPrincipalMedico.resx">
+      <DependentUpon>FormPrincipalMedico.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormSelecionarEspecialidade.resx">
       <DependentUpon>FormSelecionarEspecialidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTipoSintoma.resx">
+      <DependentUpon>FormTipoSintoma.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

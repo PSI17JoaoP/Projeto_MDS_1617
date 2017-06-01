@@ -28,19 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.consultarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripTextBox2 = new System.Windows.Forms.ToolStripTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbpesquisarpor = new System.Windows.Forms.ComboBox();
+            this.tbxpesquisa = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.cbpesquisarpor = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvminhasconsultas = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvminhasconsultas)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -82,7 +85,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.tbxpesquisa);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.cbpesquisarpor);
             this.groupBox1.Controls.Add(this.label1);
@@ -93,6 +96,37 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Caixa de Pesquisa";
             // 
+            // tbxpesquisa
+            // 
+            this.tbxpesquisa.Location = new System.Drawing.Point(104, 44);
+            this.tbxpesquisa.Name = "tbxpesquisa";
+            this.tbxpesquisa.Size = new System.Drawing.Size(313, 20);
+            this.tbxpesquisa.TabIndex = 3;
+            this.tbxpesquisa.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 47);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(98, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Nome de Paciente:";
+            // 
+            // cbpesquisarpor
+            // 
+            this.cbpesquisarpor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbpesquisarpor.FormattingEnabled = true;
+            this.cbpesquisarpor.Items.AddRange(new object[] {
+            "Nome Paciente",
+            "Data",
+            "Hora"});
+            this.cbpesquisarpor.Location = new System.Drawing.Point(104, 19);
+            this.cbpesquisarpor.Name = "cbpesquisarpor";
+            this.cbpesquisarpor.Size = new System.Drawing.Size(139, 21);
+            this.cbpesquisarpor.TabIndex = 1;
+            this.cbpesquisarpor.SelectedIndexChanged += new System.EventHandler(this.cbpesquisarpor_SelectedIndexChanged);
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -102,59 +136,62 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Pesquisar por:";
             // 
-            // cbpesquisarpor
+            // dgvminhasconsultas
             // 
-            this.cbpesquisarpor.Enabled = false;
-            this.cbpesquisarpor.FormattingEnabled = true;
-            this.cbpesquisarpor.Items.AddRange(new object[] {
-            "Nome Paciente",
-            "Data",
-            "Hora"});
-            this.cbpesquisarpor.Location = new System.Drawing.Point(85, 19);
-            this.cbpesquisarpor.Name = "cbpesquisarpor";
-            this.cbpesquisarpor.Size = new System.Drawing.Size(158, 21);
-            this.cbpesquisarpor.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Tipo de Filtro:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(85, 44);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(332, 20);
-            this.textBox1.TabIndex = 3;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 130);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(423, 135);
-            this.dataGridView1.TabIndex = 4;
+            this.dgvminhasconsultas.AllowUserToAddRows = false;
+            this.dgvminhasconsultas.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvminhasconsultas.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvminhasconsultas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvminhasconsultas.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgvminhasconsultas.Location = new System.Drawing.Point(12, 130);
+            this.dgvminhasconsultas.Name = "dgvminhasconsultas";
+            this.dgvminhasconsultas.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvminhasconsultas.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgvminhasconsultas.RowHeadersVisible = false;
+            this.dgvminhasconsultas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvminhasconsultas.Size = new System.Drawing.Size(423, 135);
+            this.dgvminhasconsultas.TabIndex = 4;
             // 
             // FormMinhasConsultas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 276);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvminhasconsultas);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMinhasConsultas";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestão de Consultas do Médico";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMinhasConsultas_FormClosed);
+            this.Load += new System.EventHandler(this.FormMinhasConsultas_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvminhasconsultas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,10 +203,10 @@
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.ToolStripTextBox toolStripTextBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbxpesquisa;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbpesquisarpor;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvminhasconsultas;
     }
 }

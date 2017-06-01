@@ -67,7 +67,7 @@ namespace Projeto_MDS
 
         public bool ValidaData(string data)
         {
-            bool result = false;
+            /*bool result = false;
 
 
             DateTime date = DateTime.Parse(data);
@@ -76,7 +76,8 @@ namespace Projeto_MDS
                 result = true;
             }
 
-            return result;
+            return result;*/
+            return true;
         }
 
         public bool ValidaHora(string hora)

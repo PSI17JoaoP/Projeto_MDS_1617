@@ -8,11 +8,11 @@ namespace Projeto_MDS
 {
     public class Utilizadores
     {
-        protected string Username { get; set; }
-        protected string Password { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
 
 
-        protected Utilizadores(string username, string pass)
+        public Utilizadores(string username, string pass)
         {
             Username = username;
             Password = pass;
