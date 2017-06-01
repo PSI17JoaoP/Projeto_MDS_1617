@@ -14,7 +14,7 @@ namespace Projeto_MDS
         public Medicos Medico { get; set; }
 
 
-        public Marcacao(Pacientes paciente, string dataConsulta, string horaConsulta, Medicos medico, bool novo)
+        public Marcacao(Pacientes paciente, DateTime dataConsulta, string horaConsulta, Medicos medico, bool novo)
         {
             if (novo)
             {
@@ -22,7 +22,7 @@ namespace Projeto_MDS
 
                 if (ValidaData(dataConsulta))
                 {
-                    Data = dataConsulta;
+                    Data = dataConsulta.ToShortDateString();
                 }
                 else
                 {
@@ -43,19 +43,17 @@ namespace Projeto_MDS
             else
             {
                 Paciente = paciente;
-                Data = dataConsulta;
+                Data = dataConsulta.ToShortDateString();
                 Hora = horaConsulta;
                 Medico = medico;
             }
         }
 
-        public bool ValidaData(string data)
+        public bool ValidaData(DateTime data)
         {
             bool result = false;
 
-
-            DateTime date = DateTime.Parse(data);
-            if (DateTime.Compare(date, DateTime.Today) >= 0)
+            if (DateTime.Compare(data, DateTime.Today) >= 0)
             {
                 result = true;
             }

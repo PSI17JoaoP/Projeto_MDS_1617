@@ -160,7 +160,7 @@ namespace Projeto_MDS
 
                     Marcacao marcacao = new Marcacao(
                         paciente,
-                        results[1].ToString(), 
+                        Convert.ToDateTime(results[1].ToString()), 
                         results[2].ToString(), 
                         medico,
                         false
@@ -206,7 +206,7 @@ namespace Projeto_MDS
                 //--------------------
                 Medicos medico = registosMedicos.Where(m => m.Nome.Equals(nomeM)).First();
 
-                Marcacao marcacao = new Marcacao(paciente, data.ToShortDateString(), hora, medico, true);
+                Marcacao marcacao = new Marcacao(paciente, data, hora, medico, true);
 
                 registosMarcacoes.Add(marcacao);
 
