@@ -258,5 +258,12 @@ namespace Projeto_MDS
 
             return result;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormLogin form = new FormLogin();
+            form.Show();
+            Hide();
+        }
     }
 }
