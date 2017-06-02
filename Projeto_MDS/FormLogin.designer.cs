@@ -65,6 +65,7 @@
             this.tbxpalavrapasse.Name = "tbxpalavrapasse";
             this.tbxpalavrapasse.Size = new System.Drawing.Size(153, 20);
             this.tbxpalavrapasse.TabIndex = 3;
+            this.tbxpalavrapasse.UseSystemPasswordChar = true;
             this.tbxpalavrapasse.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyDown);
             // 
             // FormLogin
@@ -76,6 +77,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbxnomeutilizador);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "FormLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";

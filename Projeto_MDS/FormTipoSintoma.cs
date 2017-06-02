@@ -13,7 +13,7 @@ namespace Projeto_MDS
 {
     public partial class FormTipoSintoma : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Asus\Desktop\Rep_ProjetoMDS\Projeto_MDS_1617\Projeto_MDS\basedadoshospital.mdf;Integrated Security=True");
+        SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString);
         private Boolean nova;
         Utilizadores utilizador;
         int idutilizador;
@@ -39,10 +39,21 @@ namespace Projeto_MDS
                 TipoSintoma tiposintoma;
                 if (nova == true)
                 {
-                    Boolean existe = verificarExisteTipoSintoma(nome);
-                    if(existe == false) { 
-                        tiposintoma = new TipoSintoma(nome, descricao);
-                        guardarTipoSintoma(tiposintoma);
+                    tiposintoma = new TipoSintoma(nome, descricao);
+                    Boolean existe = tiposintoma.verificarExisteTipoSintoma();
+                    if(existe == false) {
+                        Boolean guardado = false;
+                        
+                        guardado = tiposintoma.guardarTipoSintoma();
+                        if(guardado == true)
+                        {
+                            nova = true;
+                            limparDados();
+                        }
+                        else
+                        {
+                            MessageBox.Show("O tipo de sintoma não foi criado.", "Criação de dados");
+                        }
                     }
                     else
                     {
@@ -52,10 +63,21 @@ namespace Projeto_MDS
                 else
                 {
                     int idtiposintoma = (int)dgvtiposdesintomas.CurrentRow.Cells[0].Value;
-                    Boolean existe = verificarExisteTipoSintoma(nome, idtiposintoma);
-                    if(existe == false) { 
-                        tiposintoma = new TipoSintoma(nome, descricao);
-                        alterarTipoSintoma(tiposintoma);
+                    tiposintoma = new TipoSintoma(nome, descricao);
+                    Boolean existe = tiposintoma.verificarExisteTipoSintoma(idtiposintoma);
+                    if(existe == false) {
+                        Boolean alterado = false;
+                        
+                        alterado = tiposintoma.alterarTipoSintoma(idtiposintoma);
+                        if(alterado == true)
+                        {
+                            nova = true;
+                            limparDados();
+                        }
+                        else
+                        {
+                            MessageBox.Show("O tipo de sintoma não foi alterado.", "Alteração de dados");
+                        }
                     }
                     else
                     {
@@ -77,7 +99,7 @@ namespace Projeto_MDS
 
         }
 
-        private Boolean verificarExisteTipoSintoma(string nome, int idtiposintoma)
+        /*private Boolean verificarExisteTipoSintoma(string nome, int idtiposintoma)
         {
             Boolean existe = false;
             con.Open();
@@ -97,9 +119,9 @@ namespace Projeto_MDS
             }
             con.Close();
             return existe;
-        }
+        }*/
 
-        private Boolean verificarExisteTipoSintoma(string nome)
+        /*private Boolean verificarExisteTipoSintoma(string nome)
         {
             Boolean existe = false;
             con.Open();
@@ -120,9 +142,9 @@ namespace Projeto_MDS
 
             con.Close();
             return existe;
-        }
+        }*/
 
-        private void alterarTipoSintoma(TipoSintoma tiposintoma)
+        /*private void alterarTipoSintoma(TipoSintoma tiposintoma)
         {
             int idtiposintoma = (int)dgvtiposdesintomas.CurrentRow.Cells[0].Value;
             con.Open();
@@ -137,8 +159,9 @@ namespace Projeto_MDS
             nova = true;
             limparDados();
         }
+        */
 
-        private void guardarTipoSintoma(TipoSintoma tiposintoma)
+        /*private void guardarTipoSintoma(TipoSintoma tiposintoma)
         {
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -148,7 +171,7 @@ namespace Projeto_MDS
             con.Close();
             nova = true;
             limparDados();
-        }
+        }*/
 
         private void atualizarTabela()
         {
@@ -190,25 +213,55 @@ namespace Projeto_MDS
         private void btnapagar_Click(object sender, EventArgs e)
         {
             int idtiposintoma = (int)dgvtiposdesintomas.CurrentRow.Cells[0].Value;
-            apagarTipoSintoma(idtiposintoma);
-        }
+            string nome = dgvtiposdesintomas.CurrentRow.Cells[1].Value.ToString();
+            string obs = dgvtiposdesintomas.CurrentRow.Cells[2].Value.ToString();
+            TipoSintoma tiposintoma = new TipoSintoma(nome, obs);
 
-        private void apagarTipoSintoma(int idtiposintoma)
-        {
             DialogResult confirmar = MessageBox.Show("Deseja eliminar o tipo de sintoma selecionado?", "Eliminação de dados", MessageBoxButtons.YesNo);
-                if(confirmar == DialogResult.Yes) { 
-                    con.Open();
-                    SqlCommand cmd = con.CreateCommand();
-                    cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "DELETE FROM tipo_sintoma WHERE Id = " + idtiposintoma;
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+            if (confirmar == DialogResult.Yes)
+            {
+                Boolean eliminado = tiposintoma.apagarTipoSintoma(idtiposintoma);
 
+                if(eliminado == true)
+                {
+                    MessageBox.Show("O tipo de sintoma foi eliminado.", "Eliminação de dados");
                     atualizarTabela();
                     nova = true;
                     limparDados();
                 }
+                else
+                {
+                    MessageBox.Show("Erro na eliminação do tipo de sintoma. O tipo de sintoma está associado a uma consulta.", "Eliminação de dados");
+                }
+            }
+
+            
         }
+
+        /*private void apagarTipoSintoma(int idtiposintoma)
+        {
+            
+                    con.Open();
+                    SqlCommand cmd = con.CreateCommand();
+                    cmd.CommandType = CommandType.Text;
+                try
+                {
+                    cmd.CommandText = "DELETE FROM tipo_sintoma WHERE Id = " + idtiposintoma;
+                    int resultado = cmd.ExecuteNonQuery();
+                    if (resultado > 0)
+                    {
+                       
+                    }
+                }
+                catch (Exception)
+                {
+                    
+                }
+                con.Close();
+
+                
+                
+        }*/
 
 
 

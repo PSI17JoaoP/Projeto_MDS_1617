@@ -13,7 +13,7 @@ namespace Projeto_MDS
 {
     public partial class FormLogin : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Asus\Desktop\Rep_ProjetoMDS\Projeto_MDS_1617\Projeto_MDS\basedadoshospital.mdf;Integrated Security=True");
+        SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString);
         public FormLogin()
         {
             InitializeComponent();

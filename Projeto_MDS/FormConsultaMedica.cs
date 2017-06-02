@@ -13,23 +13,30 @@ namespace Projeto_MDS
 {
     public partial class FormConsultaMedica : Form
     {
-        SqlConnection con = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Asus\Desktop\Rep_ProjetoMDS\Projeto_MDS_1617\Projeto_MDS\basedadoshospital.mdf;Integrated Security=True");
+        SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString);
         Boolean nova;
         int idmarcacao;
         Utilizadores utilizador;
         int idutilizador;
+        Consulta consulta1;
         public FormConsultaMedica(int idmarcacao1, Utilizadores utilizador1, int idutilizador1)
         {
             InitializeComponent();
             idmarcacao = idmarcacao1;
             utilizador = utilizador1;
             idutilizador = idutilizador1;
+            consulta1 = new Consulta();
             carregarDadosMarcacao(idmarcacao);
-            carregarTiposSintomas();
+
+
+            List<TipoSintoma> tipossintomas = new List<TipoSintoma>();
+            tipossintomas = consulta1.carregarTiposSintomas();
+            cmbtiposintoma.Items.AddRange(tipossintomas.ToArray());
+
             cmbtiposintoma.SelectedIndex = 0;
             nova = true;
 
-            Boolean jaregistada = verificaExisteConsulta(idmarcacao);
+            Boolean jaregistada = consulta1.verificaExisteConsulta(idmarcacao);
             if(jaregistada == true)
             {
                 nova = false;
@@ -72,14 +79,14 @@ namespace Projeto_MDS
             }
             con.Close();
 
-            string tiposintoma = getNomeTipoSintoma(id_tiposintomas);
-            MessageBox.Show(id_tiposintomas + " - " + tiposintoma);
+            string tiposintoma = consulta1.getNomeTipoSintoma(id_tiposintomas);
+            //MessageBox.Show(id_tiposintomas + " - " + tiposintoma);
             cmbtiposintoma.SelectedItem = tiposintoma;
             tbxdescricaosintomas.Text = descricao_sintomas;
             tbxmedicamentos.Text = medicacao_tratamentos;
         }
 
-        private string getNomeTipoSintoma(int id_tiposintoma)
+        /*private string getNomeTipoSintoma(int id_tiposintoma)
         {
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -100,10 +107,10 @@ namespace Projeto_MDS
             }
             con.Close();
             return nome;
-        }
+        }*/
 
         
-        private Boolean verificaExisteConsulta(int idmarcacao)
+        /*private Boolean verificaExisteConsulta(int idmarcacao)
         {
             Boolean existe = false;
             con.Open();
@@ -131,9 +138,9 @@ namespace Projeto_MDS
 
             con.Close();
             return existe;
-        }
+        }*/
 
-        private void carregarTiposSintomas()
+        /*private void carregarTiposSintomas()
         {
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -159,7 +166,7 @@ namespace Projeto_MDS
                 }
             }
             con.Close();
-        }
+        }*/
 
         private void carregarDadosMarcacao(int idmarcacao)
         {
@@ -177,15 +184,15 @@ namespace Projeto_MDS
             if (reader.HasRows)
             {
                 if (reader.Read()) { 
-                int id = Convert.ToInt32(reader[0]);
-                DateTime data = Convert.ToDateTime(reader[1]);
-                string hora = reader[2].ToString();
-                string nomepaciente = reader[3].ToString();
+                    int id = Convert.ToInt32(reader[0]);
+                    DateTime data = Convert.ToDateTime(reader[1]);
+                    string hora = reader[2].ToString();
+                    string nomepaciente = reader[3].ToString();
 
-                tbxdata.Text = data.ToString("dd/MM/yyyy");
-                string data1 = tbxdata.Text;
-                tbxhora.Text = hora;
-                tbxnomepaciente.Text = nomepaciente;
+                    tbxdata.Text = data.ToString("dd/MM/yyyy");
+                    string data1 = tbxdata.Text;
+                    tbxhora.Text = hora;
+                    tbxnomepaciente.Text = nomepaciente;
                 }
 
             }
@@ -195,7 +202,7 @@ namespace Projeto_MDS
 
         private void btnregistar_Click(object sender, EventArgs e)
         {
-            
+            Consulta consulta2 = new Consulta();
 
             if(cmbtiposintoma.SelectedIndex != -1 && tbxdescricaosintomas.Text.Length > 0 && tbxmedicamentos.Text.Length > 0)
             {
@@ -203,16 +210,37 @@ namespace Projeto_MDS
                 string descricaosintomas = tbxdescricaosintomas.Text;
                 string medicamentos = tbxmedicamentos.Text;
 
-                int idtiposintoma = getIdTipoSintoma(tiposintoma);
+                int idtiposintoma = consulta2.getIdTipoSintoma(tiposintoma);
 
                 Consulta consulta = new Consulta(idtiposintoma, idmarcacao, descricaosintomas, medicamentos);
+
+
+
                 if(nova == true)
                 {
-                    guardarConsulta(consulta);
+                    Boolean guardado = consulta.guardarConsulta();
+                    if(guardado == true)
+                    {
+                        MessageBox.Show("Consulta registada com sucesso", "Registo de Consulta");
+                    }
+                    else
+                    {
+                        MessageBox.Show("A consulta não foi registada", "Registo de Consulta");
+                    }
                 }
                 else
                 {
-                    alterarConsulta(consulta);
+                    Boolean alterado = consulta.alterarConsulta(idmarcacao);
+
+                    if(alterado == true)
+                    {
+                        MessageBox.Show("Consulta alterada com sucesso.", "Alteração de dados");
+                    }
+                    else
+                    {
+                        MessageBox.Show("A consulta não foi alterado.", "Alteração de dados");
+                    }
+
                 }
             }
             else
@@ -221,7 +249,7 @@ namespace Projeto_MDS
             }
         }
 
-        private void alterarConsulta(Consulta consulta)
+        /*private void alterarConsulta(Consulta consulta)
         {
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -235,9 +263,9 @@ namespace Projeto_MDS
             con.Close();
             MessageBox.Show("Consulta alterada com sucesso", "Registo de consulta");
 
-        }
+        }*/
 
-        private void guardarConsulta(Consulta consulta)
+        /*private void guardarConsulta(Consulta consulta)
         {
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -246,9 +274,9 @@ namespace Projeto_MDS
             cmd.ExecuteNonQuery();
             con.Close();
             MessageBox.Show("Consulta registada com sucesso", "Registo de consulta");
-        }
+        }*/
 
-        private int getIdTipoSintoma(string tiposintoma)
+        /*private int getIdTipoSintoma(string tiposintoma)
         {
             con.Open();
             SqlCommand cmd = con.CreateCommand();
@@ -269,7 +297,7 @@ namespace Projeto_MDS
             }
             con.Close();
             return id;
-        }
+        }*/
 
         private void groupBox2_Enter(object sender, EventArgs e)
         {
