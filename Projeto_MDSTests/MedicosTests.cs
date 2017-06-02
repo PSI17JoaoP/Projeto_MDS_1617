@@ -12,28 +12,19 @@ namespace Projeto_MDS.Tests
     public class MedicosTests
     {
         [TestMethod()]
-        public void MedicosTest()
-        {
-            Assert.Fail();
-        }
-
-        [TestMethod()]
         public void Adicionar()
         {
-            Medicos medico = new Medicos("teste", "teste", "Este Médico", "10:00", "11:00", 981444444, new Especialidades("Geral"));
+            Medicos medico = new Medicos("testeAdicionar", "testeAdicionar", "Este Médico", "10:00", "11:00", 981444444, new Especialidades("Geral"));
 
             Assert.IsTrue(medico.Adicionar());
-
-            /*if(medico.Adicionar() == false)
-            {
-                Assert.Fail();
-            }*/
         }
 
         [TestMethod()]
         public void VerificarDadosMedico()
         {
-            Assert.Fail();
+            Medicos medico = new Medicos("testeVerificar", "testeVerificar", "Este Médico", "10:00", "11:00", 128574655, new Especialidades("Geral"));
+
+            Assert.IsTrue(medico.VerificarDadosMedico());
         }
     }
 }
