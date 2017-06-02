@@ -26,8 +26,11 @@ namespace Projeto_MDS
             {
                 if(tbxnomeutilizador.Text.Length > 0 && tbxpalavrapasse.Text.Length > 0)
                 {
+                    //<<<----------Login sem hash da password, devido a dados dos médicos (password) existirem em plain text na BD----------->>>>>
+                    //  (Foram inseridos manualmente na BD para teste, mas depois dos médicos estarem associados a marcações, a mudança exigia a eliminação de todos os dados associados a eles, 
+                    //   pois requiria a sua remoção e re-inserção)    Por efeito, o login é com a password em plain text. Temos conhecimento que deveria ser com a hash da mesma. O tempo é escasso para efetuar as alterações necessárias.
                     string nome = tbxnomeutilizador.Text.Trim();
-                    string palavrapasse = HashPassword(tbxpalavrapasse.Text);
+                    string palavrapasse = tbxpalavrapasse.Text;
 
                     con.Open();
                     SqlCommand cmd = con.CreateCommand();
