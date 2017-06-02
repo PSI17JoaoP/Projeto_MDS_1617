@@ -125,44 +125,28 @@ namespace Projeto_MDS
                 con.Open();
                 SqlCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
-                
+
+                try
+                {
                     cmd.CommandText = "DELETE FROM tipo_sintoma WHERE Id = " + idtiposintoma;
                     int resultado = cmd.ExecuteNonQuery();
                     if (resultado > 0)
                     {
                         eliminado = true;
                     }
-                
+                    else
+                    {
+                        eliminado = false;
+                    }
+                }
+                catch (Exception)
+                {
+                    eliminado = false;
+                }
+
                 con.Close();
             }
             return eliminado;
-        }
-
-        private List<TipoSintoma> pesquisarNomeTipoSintoma(string nome)
-        {
-            List<TipoSintoma> tipossintomas = new List<TipoSintoma>();
-
-            using (SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString)) {
-                con.Open();
-                SqlCommand cmd = con.CreateCommand();
-                SqlDataReader reader;
-
-                cmd.CommandText = "SELECT * FROM tipo_sintoma WHERE nome LIKE '%" + nome + "%'";
-                cmd.CommandType = CommandType.Text;
-                reader = cmd.ExecuteReader();
-
-                while (reader.HasRows)
-                {
-                    int id = Convert.ToInt32(reader[0]);
-                    string nome1 = reader[1].ToString();
-                    string obs = reader[2].ToString();
-
-                    TipoSintoma tiposintoma = new TipoSintoma(nome1, obs);
-
-                    tipossintomas.Add(tiposintoma);
-                }
-            }
-            return tipossintomas;
         }
     }
 }

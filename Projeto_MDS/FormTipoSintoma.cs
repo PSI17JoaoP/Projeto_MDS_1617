@@ -87,94 +87,15 @@ namespace Projeto_MDS
                         }
                     }
                 }
-                //nova = true;
-                //limparDados();
             }
             else
             {
                 MessageBox.Show("Preencha o nome do tipo de sintoma", "Preenchimento de dados");
             }
-            
-
-            //MessageBox.Show("Record inserted sucessfully");
 
             atualizarTabela();
 
         }
-
-        /*private Boolean verificarExisteTipoSintoma(string nome, int idtiposintoma)
-        {
-            Boolean existe = false;
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
-            SqlDataReader reader;
-
-            cmd.CommandText = "SELECT * FROM tipo_sintoma WHERE UPPER(nome) = '" + nome + "' AND Id != " + idtiposintoma;
-            cmd.CommandType = CommandType.Text;
-            reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    existe = true;
-                }
-            }
-            con.Close();
-            return existe;
-        }*/
-
-        /*private Boolean verificarExisteTipoSintoma(string nome)
-        {
-            Boolean existe = false;
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
-            SqlDataReader reader;
-
-            cmd.CommandText = "SELECT * FROM tipo_sintoma WHERE UPPER(nome) = '" + nome + "'";
-            cmd.CommandType = CommandType.Text;
-            reader = cmd.ExecuteReader();
-
-            if (reader.HasRows)
-            {
-                if (reader.Read())
-                {
-                    existe = true;
-                }
-            }
-
-            con.Close();
-            return existe;
-        }*/
-
-        /*private void alterarTipoSintoma(TipoSintoma tiposintoma)
-        {
-            int idtiposintoma = (int)dgvtiposdesintomas.CurrentRow.Cells[0].Value;
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "UPDATE tipo_sintoma SET "
-                        + "nome = '" + tiposintoma.Nome + "',"
-                        + "obs = '" + tiposintoma.Observacoes + "'"
-                        + " WHERE Id = " + idtiposintoma;
-            cmd.ExecuteNonQuery();
-            con.Close();
-            nova = true;
-            limparDados();
-        }
-        */
-
-        /*private void guardarTipoSintoma(TipoSintoma tiposintoma)
-        {
-            con.Open();
-            SqlCommand cmd = con.CreateCommand();
-            cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "INSERT INTO tipo_sintoma(nome, obs) VALUES ('" + tiposintoma.Nome + "', '" + tiposintoma.Observacoes + "')";
-            cmd.ExecuteNonQuery();
-            con.Close();
-            nova = true;
-            limparDados();
-        }*/
 
         private void atualizarTabela()
         {
@@ -193,7 +114,11 @@ namespace Projeto_MDS
             
 
             int i = dgvtiposdesintomas.Rows.Count;
-            dgvtiposdesintomas.CurrentCell = dgvtiposdesintomas.Rows[i -1].Cells[0];
+
+            if (i != 0)
+            {
+                dgvtiposdesintomas.CurrentCell = dgvtiposdesintomas.Rows[i - 1].Cells[0];
+            }
 
         }
 

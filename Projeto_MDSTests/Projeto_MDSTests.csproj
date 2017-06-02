@@ -55,6 +55,7 @@
     <Compile Include="MarcacaoTests.cs" />
     <Compile Include="MedicosTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TipoSintomaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Projeto_MDS\Projeto_MDS.csproj">

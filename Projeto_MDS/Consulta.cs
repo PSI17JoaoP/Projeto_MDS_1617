@@ -111,7 +111,7 @@ namespace Projeto_MDS
 
         public List<TipoSintoma> carregarTiposSintomas()
         {
-            List<TipoSintoma> lista = new List<TipoSintoma>();
+            List<TipoSintoma> lista = null;
             using (SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString))
             {
                 con.Open();
@@ -126,6 +126,7 @@ namespace Projeto_MDS
 
                 if (reader.HasRows)
                 {
+                    lista = new List<TipoSintoma>();
                     while (reader.Read())
                     {
                         int id = Convert.ToInt32(reader[0]);
@@ -144,7 +145,7 @@ namespace Projeto_MDS
 
         public string getNomeTipoSintoma(int id_tiposintoma)
         {
-            string nome = "";
+            string nome = null;
             using (SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString))
             {
                 con.Open();

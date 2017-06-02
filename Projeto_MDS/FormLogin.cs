@@ -24,8 +24,6 @@ namespace Projeto_MDS
         {
             if(e.KeyCode == Keys.Enter)
             {
-                //int id = 0;
-                //Boolean medico = false;
                 if(tbxnomeutilizador.Text.Length > 0 && tbxpalavrapasse.Text.Length > 0)
                 {
                     string nome = tbxnomeutilizador.Text.Trim();
@@ -41,55 +39,24 @@ namespace Projeto_MDS
 
                     reader = cmd.ExecuteReader();
 
-                    //int id = reader.GetOrdinal("Id");
-                    //int nomeutilizador = reader.GetOrdinal("username");
-                    //int palavrapasse1 = reader.GetOrdinal("password");
+                    if (reader.HasRows)
+                    {
 
-                    if (reader.HasRows) { 
                         if (reader.Read())
                         {
                             int id = Convert.ToInt32(reader[0]);
-                            //MessageBox.Show(id.ToString());
-                            //MessageBox.Show(reader[1].ToString());
-                            //MessageBox.Show(reader[2].ToString());
-
-
 
                             Utilizadores utilizador = new Utilizadores(reader[1].ToString(), reader[2].ToString());
 
-                            //MessageBox.Show(utilizador.ToString());
-
-                            /*FormMinhasConsultas form = new FormMinhasConsultas(utilizador, id);
+                            FormPrincipalMedico form = new FormPrincipalMedico(utilizador, id);
                             form.Show();
-                            Hide();*/                            
-
-                            /*medico = verificaMedico(id);
-
-                            if(medico == true)
-                            {*/
-                                FormPrincipalMedico form = new FormPrincipalMedico(utilizador, id);
-                                form.Show();
-                                Hide();
-                            /*}
-                            else
-                            {
-                                MessageBox.Show("O utilizador inserido não é médico.");
-                            }*/
+                            Hide();
                         }
                     }
                     else
                     {
                         MessageBox.Show("Utilizador inválido.");
                     }
-                    
-                    //con.Close();
-                    //int id1 = reader.GetInt32(id);
-                    //string nomeutilizador1 = reader.GetString(1);
-                    //string palavrapasse11 = reader.GetString(palavrapasse1);
-
-                    //MessageBox.Show(id1 + " - " + nomeutilizador1 + " - " + palavrapasse11);   
-                    
-                    //cmd.ExecuteNonQuery();
                 }
                 else
                 {
@@ -107,7 +74,6 @@ namespace Projeto_MDS
             SqlDataReader reader;
             Boolean medico = false;
             cmd.CommandText = "SELECT * FROM medico WHERE id_utilizador = " + idutilizador;
-
             cmd.CommandType = CommandType.Text;
 
             reader = cmd.ExecuteReader();
