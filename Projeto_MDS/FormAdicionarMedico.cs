@@ -16,6 +16,8 @@ namespace Projeto_MDS
     {
         private FormGestaoMedicos formGestaoMedicos;
 
+        private Especialidades especialidadeSelecionada;
+
         public FormAdicionarMedico(FormGestaoMedicos form)
         {
             InitializeComponent();
@@ -44,11 +46,11 @@ namespace Projeto_MDS
                         if (dtpHoraEntrada.Value.CompareTo(dtpHoraSaida.Value) < 0)
                         {
                             string usernameMedico = tbUsername.Text.Trim();
-                            string passwordMedico = HashPassword(mtbPassword.Text);
+                            string passwordMedico = mtbPassword.Text;
                             string nomeMedico = tbNome.Text.Trim();
                             string horaEntradaMedico = dtpHoraEntrada.Text;
                             string horaSaidaMedico = dtpHoraSaida.Text;
-                            Especialidades especialidadeMedico = GetEspecialidadeForm(tbEspecialidade.Text);
+                            Especialidades especialidadeMedico = especialidadeSelecionada;
 
                             DialogResult confirmacaoAdicionar = MessageBox.Show("Tem a certeza qe deseja inserir o médico '" + nomeMedico + "' ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
@@ -62,9 +64,10 @@ namespace Projeto_MDS
                                     {
                                         if (medico.VerificarDadosMedico())
                                         {
-                                            if(medico.Adicionar())
+                                            if (medico.Adicionar())
                                             {
                                                 MessageBox.Show("Médico inserido com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                formGestaoMedicos.RefreshTabelaMedicos();
                                                 formGestaoMedicos.Show();
                                                 Close();
                                             }
@@ -112,65 +115,8 @@ namespace Projeto_MDS
         public void GetFormSelecionarEspecialidade(Especialidades especialidade)
         {
             tbEspecialidade.Text = especialidade.Nome;
-        }
 
-        private Especialidades GetEspecialidadeForm(string nomeEspecialidade)
-        {
-            Especialidades especialidadeMedico = null;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionString))
-                {
-                    string queryString = "SELECT nome FROM especialidade WHERE nome = @nomeEspecialidade";
-
-                    using (SqlCommand querySql = new SqlCommand(queryString, connection))
-                    {
-                        SqlParameter nomeSQL = new SqlParameter("@nomeEspecialidade", nomeEspecialidade);
-                        querySql.Parameters.Add(nomeSQL);
-
-                        connection.Open();
-
-                        using (SqlDataReader queryReader = querySql.ExecuteReader())
-                        {
-                            if (queryReader.HasRows)
-                            {
-                                queryReader.Read();
-                                especialidadeMedico = new Especialidades(queryReader["nome"].ToString());
-                            }
-
-                            else
-                            {
-                                MessageBox.Show("Não existe nenhuma especialidade com o nome inserido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-
-                        connection.Close();
-                    }
-                }
-            }
-
-            catch(Exception)
-            {
-                MessageBox.Show("Ocorreu um erro no pedido à base de dados", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return especialidadeMedico;
-        }
-
-        private string HashPassword(string password)
-        {
-            string passwordHash;
-
-            using (SHA512 sha512Algorithm = new SHA512CryptoServiceProvider())
-            {
-                byte[] dadosBytes = Encoding.UTF8.GetBytes(password);
-                byte[] hashBytes = sha512Algorithm.ComputeHash(dadosBytes);
-
-                passwordHash = BitConverter.ToString(hashBytes);
-            }
-
-            return passwordHash;
+            especialidadeSelecionada = especialidade;
         }
     }
 }

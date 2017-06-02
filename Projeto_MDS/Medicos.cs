@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -75,7 +76,7 @@ namespace Projeto_MDS
                             queryMedicoSql.Parameters.AddWithValue("@niss", Niss);
                             queryMedicoSql.Parameters.AddWithValue("@hora_entrada", HoraEntrada);
                             queryMedicoSql.Parameters.AddWithValue("@hora_saida", HoraSaida);
-                            queryMedicoSql.Parameters.AddWithValue("@id_especialidade", GetEspecialidadeID());
+                            queryMedicoSql.Parameters.AddWithValue("@id_especialidade", ObterIdEspecialidade());
 
                             int rowsInseridas = queryMedicoSql.ExecuteNonQuery();
 
@@ -98,7 +99,48 @@ namespace Projeto_MDS
             return medicoInserido;
         }
 
-        public int GetEspecialidadeID()
+        public bool VerificarDadosMedico()
+        {
+            bool naoExisteDados = true;
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionString))
+                {
+                    string queryString = "SELECT * FROM medico JOIN utilizador ON medico.id_utilizador = utilizador.Id";
+
+                    using (SqlCommand querySql = new SqlCommand(queryString, connection))
+                    {
+                        connection.Open();
+
+                        using (SqlDataReader queryReader = querySql.ExecuteReader())
+                        {
+                            if (queryReader.HasRows)
+                            {
+                                while (queryReader.Read())
+                                {
+                                    if (Username == queryReader["username"].ToString() || Niss.ToString() == queryReader["niss"].ToString())
+                                    {
+                                        naoExisteDados = false;
+                                    }
+                                }
+                            }
+                        }
+
+                        connection.Close();
+                    }
+                }
+            }
+
+            catch (Exception)
+            {
+                throw new Exception("Ocorreu um erro no pedido à base de dados");
+            }
+
+            return naoExisteDados;
+        }
+
+        private int ObterIdEspecialidade()
         {
             int idEspecialidade = 0;
 
@@ -138,47 +180,6 @@ namespace Projeto_MDS
             }
 
             return idEspecialidade;
-        }
-
-        public bool VerificarDadosMedico()
-        {
-            bool naoExisteDados = true;
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionString))
-                {
-                    string queryString = "SELECT * FROM medico";
-
-                    using (SqlCommand querySql = new SqlCommand(queryString, connection))
-                    {
-                        connection.Open();
-
-                        using (SqlDataReader queryReader = querySql.ExecuteReader())
-                        {
-                            if (queryReader.HasRows)
-                            {
-                                while (queryReader.Read())
-                                {
-                                    if (Username == queryReader["username"].ToString() || Niss.ToString() == queryReader["niss"].ToString())
-                                    {
-                                        naoExisteDados = false;
-                                    }
-                                }
-                            }
-                        }
-
-                        connection.Close();
-                    }
-                }
-            }
-
-            catch (Exception)
-            {
-                throw new Exception("Ocorreu um erro no pedido à base de dados");
-            }
-
-            return naoExisteDados;
         }
     }
 }
