@@ -27,6 +27,9 @@ namespace Projeto_MDS
             Especialidade = especialidade;
         }
 
+        /// <summary>
+        /// Getter e Setter para o NISS. Apenas niss's contem 9 digitos serão aceites.
+        /// </summary>
         public int Niss
         {
             get{ return _niss; }
@@ -45,6 +48,10 @@ namespace Projeto_MDS
             }
         }
 
+        /// <summary>
+        /// Método de Adicionar um médico à base de dados. Executa uma query SQL, com os dados do objeto, para inserir a médico à base de dados.
+        /// </summary>
+        /// <returns>Boolean que determina se a inserção foi bem sucedida</returns>
         public bool Adicionar()
         {
             bool medicoInserido = false;
@@ -53,20 +60,30 @@ namespace Projeto_MDS
             {
                 using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionString))
                 {
+                    //Inserção do username e password(hash) do médico na tabela 'utilizador';
+                    //Adquirição do ID do user selecionado, através da função SQL SCOPE_IDENTITY (Retira o ultimo id do ultimo registo inserido, ou seja, o único registo, no mesmo scope)
+                    //(https://docs.microsoft.com/en-us/sql/t-sql/functions/scope-identity-transact-sql)
                     string queryUserString = "INSERT INTO utilizador(username, password) VALUES (@username, @password);" + "SELECT @idUser = SCOPE_IDENTITY()";
 
                     using (SqlCommand queryUserSql = new SqlCommand(queryUserString, connection))
                     {
                         connection.Open();
 
+                        //Uso de Parameters para evitar SQL Injection
                         queryUserSql.Parameters.AddWithValue("@username", Username);
                         queryUserSql.Parameters.AddWithValue("@password", Password);
+
+                        //Definição do parâmetro do ID do user. Nessesário para ser possivel retirar o valor adquido na query.
                         queryUserSql.Parameters.Add("@idUser", SqlDbType.Int).Direction = ParameterDirection.Output;
 
                         queryUserSql.ExecuteNonQuery();
 
+                        //Guarda o ID do utilizador (médico) inserido, para usar na inserção na tabela 'medico' (como Foreign Key).
                         int idUser = (int) queryUserSql.Parameters["@idUser"].Value;
 
+                        //-------------------------------------
+
+                        //Inserção dos dados do médico na tabela 'medico'
                         string queryMedicoString = "INSERT INTO medico (id_utilizador, nome, niss, hora_entrada, hora_saida, id_especialidade) VALUES (@id, @nome, @niss, @hora_entrada, @hora_saida, @id_especialidade)";
 
                         using (SqlCommand queryMedicoSql = new SqlCommand(queryMedicoString, connection))
@@ -78,13 +95,17 @@ namespace Projeto_MDS
                             queryMedicoSql.Parameters.AddWithValue("@hora_saida", HoraSaida);
                             queryMedicoSql.Parameters.AddWithValue("@id_especialidade", ObterIdEspecialidade());
 
+                            //Guarda o numero de registo afetados pela query, ou seja, o numero de registo inseridos.
                             int rowsInseridas = queryMedicoSql.ExecuteNonQuery();
 
-                            if(rowsInseridas > 0)
+                            //Se o registo foi inserido, iguala a boolean medicoInserido a true;
+                            if (rowsInseridas > 0)
                             {
                                 medicoInserido = true;
                             }
                         }
+
+                        //--------------------------------------
 
                         connection.Close();
                     }
@@ -99,6 +120,12 @@ namespace Projeto_MDS
             return medicoInserido;
         }
 
+        /// <summary>
+        /// Método para verificar se os dados do médico, sendo estes o username e o NISS, já existem na base de dados.
+        /// Executa uma query SQL que devolve os dados de todos os médicos das tabelas 'utilizador' e 'medico'.
+        /// De seguida, verifica se os dados inseridos são iguais aos dados existentes nas tabelas.
+        /// </summary>
+        /// <returns>Boolean que verifica se existe, ou não, os dados inseridos. True -> não existem; False->Já existem</returns>
         public bool VerificarDadosMedico()
         {
             bool naoExisteDados = true;
@@ -140,6 +167,12 @@ namespace Projeto_MDS
             return naoExisteDados;
         }
 
+        /// <summary>
+        /// Método que obtem o id da Especialidade do médico. Executa uma query SQL para buscar à base de dados, todas as especialidades registadas.
+        /// De seguida, compára o nome da especialidade com os nomes das especialidades existentes na BD.
+        /// Se for igual, guarda o id da especialidade da BD e quebra o ciclo de leitura de resultados da query.
+        /// </summary>
+        /// <returns>ID da Especialidade</returns>
         private int ObterIdEspecialidade()
         {
             int idEspecialidade = 0;

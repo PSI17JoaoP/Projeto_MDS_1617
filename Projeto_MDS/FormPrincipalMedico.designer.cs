@@ -65,6 +65,7 @@
             this.Name = "FormPrincipalMedico";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Janela Principal do Médico";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormPrincipalMedico_FormClosed);
             this.ResumeLayout(false);
 
         }

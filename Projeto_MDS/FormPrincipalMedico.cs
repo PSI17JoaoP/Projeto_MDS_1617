@@ -14,6 +14,7 @@ namespace Projeto_MDS
     {
         Utilizadores utilizador;
         int idutilizador;
+
         public FormPrincipalMedico(Utilizadores utilizador1, int idutilizador1)
         {
             InitializeComponent();
@@ -31,6 +32,13 @@ namespace Projeto_MDS
         private void button1_Click(object sender, EventArgs e)
         {
             FormMinhasConsultas form = new FormMinhasConsultas(utilizador, idutilizador);
+            form.Show();
+            Hide();
+        }
+
+        private void FormPrincipalMedico_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormLogin form = new FormLogin();
             form.Show();
             Hide();
         }

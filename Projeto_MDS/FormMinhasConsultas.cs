@@ -16,7 +16,6 @@ namespace Projeto_MDS
         SqlConnection con = new SqlConnection(Properties.Settings.Default.connectionString);
         Utilizadores utilizador;
         int idutilizador;
-        Marcacao marcacao;
         public FormMinhasConsultas(Utilizadores utilizador1, int idutilizador1)
         {
             InitializeComponent();
@@ -28,14 +27,14 @@ namespace Projeto_MDS
 
         private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int idmarcacao = (int)dgvminhasconsultas.CurrentRow.Cells[0].Value;
+            if(dgvminhasconsultas.SelectedRows.Count > 0)
+            {
+                int idmarcacao = (int)dgvminhasconsultas.CurrentRow.Cells[0].Value;
 
-            FormConsultaMedica form = new FormConsultaMedica(idmarcacao, utilizador, idutilizador);
-            form.Show();
-            Hide();
-
-            
-            //enviar o idmarcacao e o idutilizador;
+                FormConsultaMedica form = new FormConsultaMedica(idmarcacao, utilizador, idutilizador);
+                form.Show();
+                Hide();
+            }
         }
 
         private void asMinhasConsultasMédicasToolStripMenuItem_Click(object sender, EventArgs e)

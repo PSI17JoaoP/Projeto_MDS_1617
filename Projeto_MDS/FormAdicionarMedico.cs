@@ -16,6 +16,9 @@ namespace Projeto_MDS
     {
         private FormGestaoMedicos formGestaoMedicos;
 
+        /// <summary>
+        /// Especialidade Selecionada, no form de Selecionar Especialidade.
+        /// </summary>
         private Especialidades especialidadeSelecionada;
 
         public FormAdicionarMedico(FormGestaoMedicos form)
@@ -25,6 +28,9 @@ namespace Projeto_MDS
             formGestaoMedicos = form;
         }
 
+        /// <summary>
+        /// Botão de Selecionar Especialidade. Mostra o form para selecionar um especialidade existente.
+        /// </summary>
         private void BotaoSelecionarEspecialidade(object sender, EventArgs e)
         {
             FormSelecionarEspecialidade formSelecionarEspecialidade = new FormSelecionarEspecialidade(this);
@@ -32,6 +38,9 @@ namespace Projeto_MDS
             Hide();
         }
 
+        /// <summary>
+        /// Botão de Adicionar Médico. Verifica se os campos estão vazios, e 
+        /// </summary>
         private void BotaoAdicionarMedico(object sender, EventArgs e)
         {
             if(tbNome.Text.Length > 0 && tbNSS.Text.Length > 0)
@@ -41,8 +50,10 @@ namespace Projeto_MDS
                     int nissMedico;
                     string nissForm = tbNSS.Text.Trim();
 
+                    //Converte o NISS inserido para um inteiro. Se não conter caratéres ou caratéres especiais, devolve um boolean de tipo true.
                     if (Int32.TryParse(nissForm, out nissMedico))
                     {
+                        //Se a hora de entrada inserida é antes da hora de saida inserida, devolve true.
                         if (dtpHoraEntrada.Value.CompareTo(dtpHoraSaida.Value) < 0)
                         {
                             string usernameMedico = tbUsername.Text.Trim();
@@ -52,10 +63,12 @@ namespace Projeto_MDS
                             string horaSaidaMedico = dtpHoraSaida.Text;
                             Especialidades especialidadeMedico = especialidadeSelecionada;
 
+                            //Mensagem de Confirmação
                             DialogResult confirmacaoAdicionar = MessageBox.Show("Tem a certeza qe deseja inserir o médico '" + nomeMedico + "' ?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                             if (confirmacaoAdicionar == DialogResult.Yes)
                             {
+                                //Se a especialidade selecionada é do tipo Especialidades. (Redundante, usado apenas para validar o valor de retorno do form de Selecionar Especialidade)
                                 if (especialidadeMedico is Especialidades)
                                 {
                                     Medicos medico = new Medicos(usernameMedico, passwordMedico, nomeMedico, horaEntradaMedico, horaSaidaMedico, nissMedico, especialidadeMedico);
@@ -106,12 +119,19 @@ namespace Projeto_MDS
             }
         }
 
+        /// <summary>
+        /// Botão de Cancelar. Voltar para o menu de gestão de médicos.
+        /// </summary>
         private void BotaoCancelarMedico(object sender, EventArgs e)
         {
             formGestaoMedicos.Show();
             Hide();
         }
 
+        /// <summary>
+        /// Método para receber a especialidade selecionada, no form de Selecionar Especialidade.
+        /// </summary>
+        /// <param name="especialidade">Especialidade Selecionada</param>
         public void GetFormSelecionarEspecialidade(Especialidades especialidade)
         {
             tbEspecialidade.Text = especialidade.Nome;

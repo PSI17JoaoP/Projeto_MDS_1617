@@ -21,7 +21,9 @@ namespace Projeto_MDS
 
             formMenu = form;
         }
-
+        /// <summary>
+        /// Evento do Load do Form. Executa uma query para ir buscar à base de dados, todos os médicos registados.
+        /// </summary>
         private void FormGestaoMedicos_Load(object sender, EventArgs e)
         {
             try
@@ -61,6 +63,9 @@ namespace Projeto_MDS
             }
         }
 
+        /// <summary>
+        /// Botão de Adicionar Médico. Mostra o form para inserção de dados.
+        /// </summary>
         private void BotaoAdicionarMedico(object sender, EventArgs e)
         {
             FormAdicionarMedico formAdicionarMedico = new FormAdicionarMedico(this);
@@ -68,12 +73,21 @@ namespace Projeto_MDS
             Hide();
         }
 
+        /// <summary>
+        /// Botão de Voltar ao menu principal. Volta para o menu principal (inicial).
+        /// </summary>
         private void BotaoVoltarPrincipal(object sender, EventArgs e)
         {
             formMenu.Show();
             Hide();
         }
 
+        /// <summary>
+        /// Método para buscar o nome de uma especialidade, através do seu id. Executa uma query SQL para ir buscar à base de dados, a especialidade com o mesmo id.
+        /// Utilizada para ir buscar o nome da especialidade do médico, para apresentar na List View (Evento Load do form).
+        /// </summary>
+        /// <param name="id">ID da especialidade</param>
+        /// <returns>Nome da especialidade</returns>
         private string GetEspecialidadeNome(string id)
         {
             string nomeEspecialidade = null;
@@ -113,6 +127,9 @@ namespace Projeto_MDS
             return nomeEspecialidade;
         }
 
+        /// <summary>
+        /// Faz refresh á tabela dos médicos. Executa uma query SQL para ir buscar à base de dados, todos os médicos registados, e coloca-los na List View
+        /// </summary>
         public void RefreshTabelaMedicos()
         {
             lvListaMedicos.Items.Clear();

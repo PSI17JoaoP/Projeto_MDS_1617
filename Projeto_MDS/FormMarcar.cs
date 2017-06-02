@@ -65,7 +65,8 @@ namespace Projeto_MDS
                         MessageBox.Show(ex.Message);
                     }
                 }
-            }else
+            }
+            else
             {
                 MessageBox.Show("Tem de preencher todos os campos");
             }

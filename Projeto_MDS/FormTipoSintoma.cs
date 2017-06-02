@@ -62,26 +62,29 @@ namespace Projeto_MDS
                 }
                 else
                 {
-                    int idtiposintoma = (int)dgvtiposdesintomas.CurrentRow.Cells[0].Value;
-                    tiposintoma = new TipoSintoma(nome, descricao);
-                    Boolean existe = tiposintoma.verificarExisteTipoSintoma(idtiposintoma);
-                    if(existe == false) {
-                        Boolean alterado = false;
-                        
-                        alterado = tiposintoma.alterarTipoSintoma(idtiposintoma);
-                        if(alterado == true)
-                        {
-                            nova = true;
-                            limparDados();
+                    if (dgvtiposdesintomas.SelectedRows.Count > 0)
+                    {
+                        int idtiposintoma = (int)dgvtiposdesintomas.CurrentRow.Cells[0].Value;
+                        tiposintoma = new TipoSintoma(nome, descricao);
+                        Boolean existe = tiposintoma.verificarExisteTipoSintoma(idtiposintoma);
+                        if (existe == false) {
+                            Boolean alterado = false;
+
+                            alterado = tiposintoma.alterarTipoSintoma(idtiposintoma);
+                            if (alterado == true)
+                            {
+                                nova = true;
+                                limparDados();
+                            }
+                            else
+                            {
+                                MessageBox.Show("O tipo de sintoma não foi alterado.", "Alteração de dados");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("O tipo de sintoma não foi alterado.", "Alteração de dados");
+                            MessageBox.Show("Já existe um tipo de sintoma com esse nome.", "Duplicação de dados");
                         }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Já existe um tipo de sintoma com esse nome.", "Duplicação de dados");
                     }
                 }
                 //nova = true;
@@ -317,7 +320,7 @@ namespace Projeto_MDS
                         {
                             id = Convert.ToInt32(tbxpesquisa.Text);
                         }
-                        catch(Exception ex)
+                        catch(Exception)
                         {
                             MessageBox.Show("Insira valores numéricos");
                         }

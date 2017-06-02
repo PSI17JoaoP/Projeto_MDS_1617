@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,11 +20,6 @@ namespace Projeto_MDS
             InitializeComponent();
         }
 
-        private void FormLogin_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
@@ -32,8 +28,8 @@ namespace Projeto_MDS
                 //Boolean medico = false;
                 if(tbxnomeutilizador.Text.Length > 0 && tbxpalavrapasse.Text.Length > 0)
                 {
-                    string nome = tbxnomeutilizador.Text;
-                    string palavrapasse = tbxpalavrapasse.Text;
+                    string nome = tbxnomeutilizador.Text.Trim();
+                    string palavrapasse = HashPassword(tbxpalavrapasse.Text);
 
                     con.Open();
                     SqlCommand cmd = con.CreateCommand();
@@ -48,7 +44,6 @@ namespace Projeto_MDS
                     //int id = reader.GetOrdinal("Id");
                     //int nomeutilizador = reader.GetOrdinal("username");
                     //int palavrapasse1 = reader.GetOrdinal("password");
-
 
                     if (reader.HasRows) { 
                         if (reader.Read())
@@ -66,9 +61,7 @@ namespace Projeto_MDS
 
                             /*FormMinhasConsultas form = new FormMinhasConsultas(utilizador, id);
                             form.Show();
-                            Hide();*/
-
-                            
+                            Hide();*/                            
 
                             /*medico = verificaMedico(id);
 
@@ -82,7 +75,6 @@ namespace Projeto_MDS
                             {
                                 MessageBox.Show("O utilizador inserido não é médico.");
                             }*/
-                            
                         }
                     }
                     else
@@ -95,19 +87,9 @@ namespace Projeto_MDS
                     //string nomeutilizador1 = reader.GetString(1);
                     //string palavrapasse11 = reader.GetString(palavrapasse1);
 
-                    //MessageBox.Show(id1 + " - " + nomeutilizador1 + " - " + palavrapasse11); 
-
-
-
-
-
-
-
-                    
+                    //MessageBox.Show(id1 + " - " + nomeutilizador1 + " - " + palavrapasse11);   
                     
                     //cmd.ExecuteNonQuery();
-
-                    
                 }
                 else
                 {
@@ -115,10 +97,6 @@ namespace Projeto_MDS
                 }
                 
                 con.Close();
-                
-                
-
-               
             }
         }
 
@@ -145,6 +123,28 @@ namespace Projeto_MDS
             }
             con.Close();
             return medico;
+        }
+
+        private string HashPassword(string password)
+        {
+            string passwordHash;
+
+            using (SHA512 sha512Algorithm = new SHA512CryptoServiceProvider())
+            {
+                byte[] dadosBytes = Encoding.UTF8.GetBytes(password);
+                byte[] hashBytes = sha512Algorithm.ComputeHash(dadosBytes);
+
+                passwordHash = BitConverter.ToString(hashBytes);
+            }
+
+            return passwordHash;
+        }
+
+        private void FormLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            FormMenu form = new FormMenu();
+            form.Show();
+            Hide();
         }
     }
 }
