@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="ConsultaTests.cs" />
     <Compile Include="MarcacaoTests.cs" />
+    <Compile Include="MedicosTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

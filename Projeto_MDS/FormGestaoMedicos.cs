@@ -112,5 +112,46 @@ namespace Projeto_MDS
 
             return nomeEspecialidade;
         }
+
+        public void RefreshTabelaMedicos()
+        {
+            lvListaMedicos.Items.Clear();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Properties.Settings.Default.connectionString))
+                {
+                    string queryString = "SELECT * from medico";
+
+                    using (SqlCommand querySql = new SqlCommand(queryString, connection))
+                    {
+                        connection.Open();
+
+                        using (SqlDataReader queryReader = querySql.ExecuteReader())
+                        {
+                            if (queryReader.HasRows)
+                            {
+                                while (queryReader.Read())
+                                {
+                                    ListViewItem listViewRowMedico = new ListViewItem(queryReader["nome"].ToString());
+                                    listViewRowMedico.SubItems.Add(GetEspecialidadeNome(queryReader["id_especialidade"].ToString()));
+                                    listViewRowMedico.SubItems.Add(queryReader["niss"].ToString());
+                                    listViewRowMedico.SubItems.Add(queryReader["hora_entrada"].ToString());
+                                    listViewRowMedico.SubItems.Add(queryReader["hora_saida"].ToString());
+                                    lvListaMedicos.Items.Add(listViewRowMedico);
+                                }
+                            }
+                        }
+
+                        connection.Close();
+                    }
+                }
+            }
+
+            catch (Exception)
+            {
+                MessageBox.Show("Ocorreu um erro no carregamento dos médicos.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

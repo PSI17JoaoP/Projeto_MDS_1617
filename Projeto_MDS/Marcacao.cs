@@ -51,15 +51,14 @@ namespace Projeto_MDS
 
         public bool ValidaData(DateTime data)
         {
-            /*bool result = false;
+            bool result = false;
 
             if (DateTime.Compare(data, DateTime.Today) >= 0)
             {
                 result = true;
             }
 
-            return result;*/
-            return true;
+            return result;
         }
 
         public bool ValidaHora(string hora)

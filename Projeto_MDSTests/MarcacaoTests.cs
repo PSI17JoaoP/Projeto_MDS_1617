@@ -64,22 +64,96 @@ namespace Projeto_MDS.Tests
 
         }
 
+        //----------------------------------------
+
         [TestMethod()]
-        public void ValidaDataTest()
+        public void ValidaDataSucesso()
         {
-            Assert.Fail();
+            //
+            Pacientes paciente = new Pacientes("Paciente", 910000000, 201000000);
+            Especialidades especialidade = new Especialidades("Especialidade");
+            Medicos medico = new Medicos("medico", "medico", "Medico", "09:00", "19:00", 201200000, especialidade);
+            DateTime data = DateTime.Today.AddDays(1);
+            string hora = "10:30";
+
+            Marcacao marcacao = new Marcacao(paciente, data, hora, medico, false);
+            
+
+            //
+            Assert.IsTrue(marcacao.ValidaData(data));
         }
 
         [TestMethod()]
-        public void ValidaHoraTest()
+        public void ValidaDataFalha()
         {
-            Assert.Fail();
+            //
+            Pacientes paciente = new Pacientes("Paciente", 910000000, 201000000);
+            Especialidades especialidade = new Especialidades("Especialidade");
+            Medicos medico = new Medicos("medico", "medico", "Medico", "09:00", "19:00", 201200000, especialidade);
+            DateTime data = Convert.ToDateTime("01/01/2017");
+            string hora = "10:30";
+
+            Marcacao marcacao = new Marcacao(paciente, data, hora, medico, false);
+
+
+            //
+            Assert.IsFalse(marcacao.ValidaData(data));
         }
+
+        //----------------------------------------
+
+        [TestMethod()]
+        public void ValidaHoraSucesso()
+        {
+            //
+            Pacientes paciente = new Pacientes("Paciente", 910000000, 201000000);
+            Especialidades especialidade = new Especialidades("Especialidade");
+            Medicos medico = new Medicos("medico", "medico", "Medico", "09:00", "19:00", 201200000, especialidade);
+            DateTime data = DateTime.Today.AddDays(1);
+            string hora = "10:30";
+
+            Marcacao marcacao = new Marcacao(paciente, data, hora, medico, false);
+
+
+            //
+            Assert.IsTrue(marcacao.ValidaHora(hora));
+        }
+
+        [TestMethod()]
+        public void ValidaHoraFalha()
+        {
+            //
+            Pacientes paciente = new Pacientes("Paciente", 910000000, 201000000);
+            Especialidades especialidade = new Especialidades("Especialidade");
+            Medicos medico = new Medicos("medico", "medico", "Medico", "09:00", "19:00", 201200000, especialidade);
+            DateTime data = DateTime.Today.AddDays(1);
+            string hora = "99:66";
+
+            Marcacao marcacao = new Marcacao(paciente, data, hora, medico, false);
+
+
+            //
+            Assert.IsFalse(marcacao.ValidaHora(hora));
+        }
+
+        //----------------------------------------
 
         [TestMethod()]
         public void VerificarDisponibilidadeMedicaTest()
         {
-            Assert.Fail();
+            Pacientes paciente = new Pacientes("Paciente", 910000000, 201000000);
+            Especialidades especialidade = new Especialidades("Especialidade");
+            Medicos medico = new Medicos("medico", "medico", "Medico", "09:00", "19:00", 201200000, especialidade);
+            DateTime data = DateTime.Today.AddDays(1);
+            string hora = "10:30";
+
+            Marcacao marcacao = new Marcacao(paciente, data, hora, medico, false);
+
+            //Já tem consulta
+            Assert.IsTrue(marcacao.VerificarDisponibilidadeMedica(medico.Nome, data.ToShortDateString(), hora));
+
+            //Não tem consulta
+            Assert.IsFalse(marcacao.VerificarDisponibilidadeMedica(medico.Nome, data.ToShortDateString(), "10:00"));
         }
     }
 }
